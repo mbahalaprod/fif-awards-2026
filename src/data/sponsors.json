@@ -1,0 +1,74 @@
+[
+  {
+    "id": "spo-01",
+    "name": "Orange Guinée",
+    "tier": "platine",
+    "description": "Opérateur leader des télécommunications en Guinée, Orange Guinée connecte des millions d'utilisateurs et soutient depuis plusieurs éditions la création audiovisuelle nationale.",
+    "logoUrl": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=200&fit=crop&q=80",
+    "websiteUrl": "https://orange.gn",
+    "sector": "Télécommunications"
+  },
+  {
+    "id": "spo-02",
+    "name": "Société Minière de Boké (SMB)",
+    "tier": "or",
+    "description": "Consortium minier de référence en Guinée, la SMB s'engage aux côtés du FIF AWARDS pour valoriser le patrimoine culturel et créatif du pays.",
+    "logoUrl": "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=400&h=200&fit=crop&q=80",
+    "websiteUrl": "https://smb-guinee.com",
+    "sector": "Mines & Industrie"
+  },
+  {
+    "id": "spo-03",
+    "name": "Société Générale de Banques en Guinée",
+    "tier": "or",
+    "description": "Acteur bancaire historique du pays, la SGBG accompagne l'écosystème culturel guinéen et croit au pouvoir économique du cinéma.",
+    "logoUrl": "https://images.unsplash.com/photo-1556742400-b5b7c5121f2c?w=400&h=200&fit=crop&q=80",
+    "websiteUrl": "https://societegenerale.gn",
+    "sector": "Banque & Finance"
+  },
+  {
+    "id": "spo-04",
+    "name": "Brasseries de Guinée — SOBRAGUI",
+    "tier": "argent",
+    "description": "Entreprise emblématique du paysage industriel guinéen, la SOBRAGUI s'engage pour la jeunesse et la culture à travers son soutien au FIF AWARDS.",
+    "logoUrl": "https://images.unsplash.com/photo-1601933470928-c2009e6cd0e8?w=400&h=200&fit=crop&q=80",
+    "websiteUrl": "https://sobragui.com",
+    "sector": "Agro-industrie"
+  },
+  {
+    "id": "spo-05",
+    "name": "Compagnie des Bauxites de Guinée (CBG)",
+    "tier": "argent",
+    "description": "Pionnière de l'exploitation de la bauxite en Guinée, la CBG investit dans les initiatives culturelles porteuses d'image pour le pays.",
+    "logoUrl": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=200&fit=crop&q=80",
+    "websiteUrl": "https://cbg-guinee.com",
+    "sector": "Mines & Industrie"
+  },
+  {
+    "id": "spo-06",
+    "name": "Ecobank Guinée",
+    "tier": "argent",
+    "description": "Banque panafricaine présente dans plus de 30 pays, Ecobank Guinée soutient les talents créatifs de la sous-région.",
+    "logoUrl": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=200&fit=crop&q=80",
+    "websiteUrl": "https://ecobank.com/gn",
+    "sector": "Banque & Finance"
+  },
+  {
+    "id": "spo-07",
+    "name": "Radisson Blu Hôtel Conakry",
+    "tier": "bronze",
+    "description": "Hôte officiel de la 4ᵉ édition du FIF AWARDS, le Radisson Blu de Conakry met son expertise et ses espaces au service de la cérémonie.",
+    "logoUrl": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=200&fit=crop&q=80",
+    "websiteUrl": "https://radissonhotels.com",
+    "sector": "Hôtellerie & Événementiel"
+  },
+  {
+    "id": "spo-08",
+    "name": "Air Sénégal",
+    "tier": "bronze",
+    "description": "Compagnie aérienne partenaire du festival, Air Sénégal facilite la mobilité des jurys et invités internationaux à Conakry.",
+    "logoUrl": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=200&fit=crop&q=80",
+    "websiteUrl": "https://flyairsenegal.com",
+    "sector": "Transport aérien"
+  }
+]

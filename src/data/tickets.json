@@ -1,0 +1,46 @@
+[
+  {
+    "id": "standard",
+    "name": "Standard",
+    "price": 50000,
+    "currency": "GNF",
+    "description": "Accès à la cérémonie officielle de remise des prix le 20 novembre 2026.",
+    "features": [
+      "Accès au tapis rouge (zone publique)",
+      "Place assise pour la cérémonie",
+      "Programme officiel imprimé",
+      "Goodies du festival"
+    ],
+    "available": true
+  },
+  {
+    "id": "vip",
+    "name": "VIP",
+    "price": 150000,
+    "currency": "GNF",
+    "description": "Cérémonie + cocktail dînatoire dans le hall d'honneur.",
+    "features": [
+      "Tout le contenu du billet Standard",
+      "Cocktail dînatoire au hall d'honneur",
+      "Place premium dans la salle",
+      "Accès au lounge partenaires",
+      "Photo officielle avec le décor du festival"
+    ],
+    "available": true
+  },
+  {
+    "id": "premium",
+    "name": "Premium",
+    "price": 350000,
+    "currency": "GNF",
+    "description": "L'expérience complète : cérémonie, cocktail, after-party et photo officielle.",
+    "features": [
+      "Tout le contenu du billet VIP",
+      "Accès à l'after-party officielle au rooftop",
+      "Photo officielle avec un nominé (sur réservation)",
+      "Cadeau exclusif partenaire Platine",
+      "Accès au tapis rouge invités"
+    ],
+    "available": true
+  }
+]

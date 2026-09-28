@@ -1,0 +1,59 @@
+[
+  {
+    "year": 2023,
+    "theme": "Les racines du septième art guinéen",
+    "attendees": 850,
+    "films": 24,
+    "awards": 8,
+    "sponsors": 12,
+    "coverImage": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&q=80",
+      "https://images.unsplash.com/photo-1518676590629-3dcba9c5a555?w=800&q=80",
+      "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80"
+    ],
+    "topLaureates": [
+      { "category": "Meilleur Film", "winner": "Le Chant du Konkouré" },
+      { "category": "Meilleur Acteur", "winner": "Souleymane Cissé" },
+      { "category": "Meilleure Actrice", "winner": "Nènè Camara" }
+    ]
+  },
+  {
+    "year": 2024,
+    "theme": "Femmes et caméras",
+    "attendees": 1100,
+    "films": 32,
+    "awards": 9,
+    "sponsors": 16,
+    "coverImage": "https://images.unsplash.com/photo-1542204165-65bf26472b9b?w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1574267432553-4b4628081c31?w=800&q=80",
+      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80",
+      "https://images.unsplash.com/photo-1502139214982-d0ad755818d8?w=800&q=80"
+    ],
+    "topLaureates": [
+      { "category": "Meilleur Film", "winner": "Les Aurores de Tombo" },
+      { "category": "Meilleur Acteur", "winner": "Almamy Sylla" },
+      { "category": "Meilleure Actrice", "winner": "Hadja Maciré Soumah" }
+    ]
+  },
+  {
+    "year": 2025,
+    "theme": "Cinéma et identités",
+    "attendees": 1450,
+    "films": 41,
+    "awards": 10,
+    "sponsors": 22,
+    "coverImage": "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&q=80",
+      "https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=800&q=80",
+      "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?w=800&q=80"
+    ],
+    "topLaureates": [
+      { "category": "Meilleur Film", "winner": "Sous le baobab" },
+      { "category": "Meilleur Acteur", "winner": "Mohamed Diawara" },
+      { "category": "Meilleure Actrice", "winner": "Aïssata Bangoura" }
+    ]
+  }
+]

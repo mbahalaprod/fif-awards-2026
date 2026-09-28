@@ -1,0 +1,147 @@
+[
+  {
+    "id": "p-d1-01",
+    "day": 1,
+    "startTime": "17:00",
+    "endTime": "18:00",
+    "title": "Accueil et tapis rouge",
+    "description": "Arrivée des invités, photos officielles et accueil sur le tapis rouge devant l'hôtel Radisson Blu.",
+    "type": "opening"
+  },
+  {
+    "id": "p-d1-02",
+    "day": 1,
+    "startTime": "18:00",
+    "endTime": "18:30",
+    "title": "Cocktail de bienvenue",
+    "description": "Cocktail dînatoire dans le hall d'honneur du Radisson Blu, réservé aux invités munis d'un billet VIP ou Premium.",
+    "type": "networking"
+  },
+  {
+    "id": "p-d1-03",
+    "day": 1,
+    "startTime": "18:30",
+    "endTime": "18:45",
+    "title": "Ouverture officielle de la 4ᵉ édition",
+    "description": "Discours d'ouverture du président du Comité d'Organisation et hommage aux pionniers du cinéma guinéen.",
+    "speakers": ["Président du Comité d'Organisation"],
+    "type": "opening"
+  },
+  {
+    "id": "p-d1-04",
+    "day": 1,
+    "startTime": "18:45",
+    "endTime": "19:00",
+    "title": "Performance d'ouverture",
+    "description": "Tableau musical et chorégraphique inspiré des grands classiques du cinéma africain, signé par la Compagnie Nimba.",
+    "type": "performance"
+  },
+  {
+    "id": "p-d1-05",
+    "day": 1,
+    "startTime": "19:00",
+    "endTime": "20:30",
+    "title": "Projection du film d'ouverture",
+    "description": "Avant-première guinéenne d'un long-métrage international en présence de son équipe.",
+    "type": "screening"
+  },
+  {
+    "id": "p-d1-06",
+    "day": 1,
+    "startTime": "20:30",
+    "endTime": "21:00",
+    "title": "Échange avec l'équipe du film",
+    "description": "Discussion modérée avec le réalisateur, la productrice et deux comédiens du film d'ouverture.",
+    "type": "screening"
+  },
+  {
+    "id": "p-d1-07",
+    "day": 1,
+    "startTime": "21:00",
+    "endTime": "23:00",
+    "title": "Cocktail des cinéastes",
+    "description": "Networking professionnel entre cinéastes, productrices, distributeurs et partenaires du festival.",
+    "type": "networking"
+  },
+  {
+    "id": "p-d2-01",
+    "day": 2,
+    "startTime": "18:30",
+    "endTime": "19:00",
+    "title": "Tapis rouge — Soirée des Awards",
+    "description": "Arrivée des nominés, jury, partenaires et invités pour la soirée de remise des prix.",
+    "type": "opening"
+  },
+  {
+    "id": "p-d2-02",
+    "day": 2,
+    "startTime": "19:00",
+    "endTime": "19:15",
+    "title": "Ouverture de la cérémonie",
+    "description": "Mot du président du jury et présentation du déroulé de la soirée par les maîtres de cérémonie.",
+    "type": "opening"
+  },
+  {
+    "id": "p-d2-03",
+    "day": 2,
+    "startTime": "19:15",
+    "endTime": "20:00",
+    "title": "Premières remises de prix",
+    "description": "Remise des prix techniques : Meilleur Montage, Meilleur Son, Meilleure Direction de la Photographie, Meilleur Scénario.",
+    "type": "award"
+  },
+  {
+    "id": "p-d2-04",
+    "day": 2,
+    "startTime": "20:00",
+    "endTime": "20:15",
+    "title": "Performance live",
+    "description": "Performance musicale d'un artiste guinéen en hommage aux compositeurs et compositrices du cinéma national.",
+    "type": "performance"
+  },
+  {
+    "id": "p-d2-05",
+    "day": 2,
+    "startTime": "20:15",
+    "endTime": "21:15",
+    "title": "Prix d'interprétation et de réalisation",
+    "description": "Remise des prix Meilleure Réalisation, Meilleur Acteur, Meilleure Actrice et Prix Spécial du Jury.",
+    "type": "award"
+  },
+  {
+    "id": "p-d2-06",
+    "day": 2,
+    "startTime": "21:15",
+    "endTime": "21:30",
+    "title": "Hommage aux disparus de l'année",
+    "description": "Moment de mémoire pour les figures du cinéma et de la création audiovisuelle disparues au cours de l'année.",
+    "type": "performance"
+  },
+  {
+    "id": "p-d2-07",
+    "day": 2,
+    "startTime": "21:30",
+    "endTime": "22:00",
+    "title": "Prix majeurs : Meilleure Série et Meilleur Film",
+    "description": "Annonce et remise des deux distinctions les plus attendues de la 4ᵉ édition.",
+    "type": "award"
+  },
+  {
+    "id": "p-d2-08",
+    "day": 2,
+    "startTime": "22:00",
+    "endTime": "22:15",
+    "title": "Discours de clôture",
+    "description": "Clôture officielle de la 4ᵉ édition et annonce des grandes orientations de l'édition 2027.",
+    "type": "closing"
+  },
+  {
+    "id": "p-d2-09",
+    "day": 2,
+    "startTime": "22:15",
+    "endTime": "01:00",
+    "title": "After-party officielle",
+    "description": "Soirée festive réservée aux détenteurs de billets Premium et invités d'honneur, dans le rooftop du Radisson Blu.",
+    "type": "networking"
+  }
+]

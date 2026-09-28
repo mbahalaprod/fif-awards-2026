@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* === Palette FIF AWARDS === */
+    --background-primary: #0A0A0A;
+    --background-secondary: #1A1A1A;
+    --accent-gold: #D4AF37;
+    --accent-gold-light: #F5D76E;
+    --accent-red: #8B0000;
+    --text-primary: #FFFFFF;
+    --text-secondary: #B0B0B0;
+    --border-color: #2A2A2A;
+
+    /* === shadcn/ui aliases (HSL-less, mapped to our tokens) === */
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--accent-gold);
+    color: var(--background-primary);
+  }
+}
+
+@layer components {
+  /* Section container */
+  .section {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .section-title {
+    @apply font-serif text-3xl md:text-5xl lg:text-6xl text-text-primary;
+  }
+
+  .section-subtitle {
+    @apply font-sans text-sm md:text-base uppercase tracking-[0.2em] text-gold mb-4;
+  }
+
+  /* Gold border with subtle glow on hover */
+  .card-gold {
+    @apply bg-background-secondary border border-border rounded-lg transition-all duration-300;
+  }
+
+  .card-gold:hover {
+    @apply border-[rgba(212,175,55,0.5)];
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+  }
+
+  /* Buttons CTA principal */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 font-sans text-sm uppercase tracking-[0.15em] font-medium;
+    @apply bg-gradient-gold text-background-primary rounded-md transition-all duration-300;
+  }
+
+  .btn-gold:hover {
+    @apply scale-[1.02];
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+  }
+
+  .btn-outline-gold {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 font-sans text-sm uppercase tracking-[0.15em] font-medium;
+    @apply bg-transparent text-gold border border-gold rounded-md transition-all duration-300;
+  }
+
+  .btn-outline-gold:hover {
+    @apply bg-gold text-background-primary;
+  }
+
+  /* Marquee for sponsors carousel */
+  .marquee-track {
+    @apply flex w-max animate-marquee;
+  }
+
+  /* Hide scrollbar utility */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Cinematic gradient overlay */
+  .overlay-dark {
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.4) 40%, rgba(10, 10, 10, 0.95) 100%);
+  }
+
+  .overlay-radial {
+    background: radial-gradient(ellipse at center, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.7) 100%);
+  }
+}
