@@ -2,13 +2,7 @@ import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 
 import './globals.css';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { getSettings } from '@/lib/data';
 
-// Les contenus viennent de Supabase : on régénère les pages au plus toutes les 60 s.
-// L'espace d'administration force aussi la mise à jour après chaque modification.
-export const revalidate = 60;
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fifawards.gn';
 
@@ -50,12 +44,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const settings = await getSettings();
   return (
     <html lang="fr">
       <head>
@@ -67,9 +60,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-background-primary text-text-primary antialiased">
-        <Header voteActive={settings.voteActive} />
-        <main className="pt-20">{children}</main>
-        <Footer settings={settings} />
+        {children}
         <Toaster theme="dark" position="top-right" richColors />
       </body>
     </html>

@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 
 // Les photos envoyées depuis l'admin sont servies par Supabase Storage.
-const supabaseHost = process.env.NEXT_PUBLIC_SUPABASE_URL
-  ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL)
   : null;
 
 const nextConfig = {
@@ -13,8 +13,15 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
-      ...(supabaseHost
-        ? [{ protocol: 'https', hostname: supabaseHost, pathname: '/storage/v1/object/public/**' }]
+      ...(supabaseUrl
+        ? [
+            {
+              protocol: supabaseUrl.protocol.replace(':', ''),
+              hostname: supabaseUrl.hostname,
+              port: supabaseUrl.port,
+              pathname: '/storage/v1/object/public/**',
+            },
+          ]
         : []),
     ],
     formats: ['image/avif', 'image/webp'],

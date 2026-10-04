@@ -1,199 +1,153 @@
 # FIF AWARDS 2026 — Site officiel
 
-> Site web officiel du **Festival International du Film AWARDS** — 4ᵉ édition.
-> Les **19 et 20 novembre 2026** à l'hôtel **Radisson Blu de Conakry**, en Guinée.
+Site du **Festival International du Film AWARDS**, 4ᵉ édition, les **19 et 20 novembre
+2026** au **Radisson Blu de Conakry** (Guinée).
+
+Le site présente les **distingués 2026** dans quatre distinctions d'honneur, reçoit
+les candidatures, les messages et les demandes de réservation. Il est piloté par un
+**espace d'administration interne** (`/admin`) relié à **Supabase**.
+
+| Document                                   | Pour qui                          |
+| ------------------------------------------ | --------------------------------- |
+| [docs/SUPABASE.md](docs/SUPABASE.md)       | mise en ligne : Supabase, Resend, Vercel |
+| [docs/GUIDE-ADMIN.md](docs/GUIDE-ADMIN.md) | équipe du festival : utiliser l'admin |
+| ce README                                  | développeurs                      |
 
 ---
 
-## 🎬 À propos
+## Stack
 
-Le FIF AWARDS récompense **toute la chaîne de valeur du cinéma guinéen** : acteurs et actrices, réalisateurs, monteurs, directeurs de la photographie, ingénieurs du son, scénaristes et tous les métiers techniques du septième art.
+- **Next.js 14** (App Router), **TypeScript** strict, **Tailwind CSS**, composants shadcn/ui
+- **Supabase** : PostgreSQL, authentification des administrateurs, stockage des images
+- **Resend** : e-mails (appel HTTP direct, sans dépendance)
+- **Vercel** : hébergement
+- React Hook Form + Zod (formulaires), Framer Motion, Sonner, Lucide
 
-Ce site sert de plateforme officielle pour :
-
-- Voter en ligne pour les nominés (1 vote par email par catégorie, validation OTP)
-- Recevoir les candidatures (formulaire 5 étapes avec validation Zod)
-- Vendre les billets de la cérémonie (3 paliers : Standard, VIP, Premium)
-- Présenter les sponsors (4 paliers : Platine, Or, Argent, Bronze)
-- Diffuser les actualités du festival
-
----
-
-## 🛠️ Stack technique
-
-- **Next.js 14** (App Router)
-- **TypeScript** strict
-- **Tailwind CSS** avec design system custom (palette or/noir)
-- **shadcn/ui** pour les composants UI
-- **Framer Motion** pour les animations
-- **React Hook Form + Zod** pour les formulaires
-- **Sonner** pour les toasts
-- **Lucide React** pour les icônes
-- Polices Google : **Playfair Display** (serif, titres) + **Inter** (sans-serif, corps)
-- Stockage V1 : fichiers JSON dans `src/data/`
-
----
-
-## 🚀 Démarrage rapide
-
-### 1. Installer les dépendances
+## Démarrage
 
 ```bash
 npm install
+cp .env.example .env.local   # puis renseigner les valeurs
+npm run dev                  # http://localhost:3000
 ```
 
-### 2. Créer le fichier d'environnement
+Sans variables Supabase, le site public s'affiche avec les contenus de départ de
+`src/data/` (quatre distinctions, une actualité), les formulaires répondent
+« service indisponible » et l'admin affiche un message de configuration.
+
+Vérifications avant chaque push :
 
 ```bash
-cp .env.local.example .env.local
+npx tsc --noEmit && npm run lint && npm run build
 ```
 
-Le fichier contient :
+## Variables d'environnement
+
+Toutes sont listées et commentées dans [`.env.example`](.env.example).
+
+| Variable                                      | Rôle                                             |
+| --------------------------------------------- | ------------------------------------------------ |
+| `NEXT_PUBLIC_SITE_URL`                        | adresse publique (sitemap, partage, e-mails)     |
+| `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` | lecture publique et connexion admin |
+| `SUPABASE_SERVICE_ROLE_KEY`                   | serveur uniquement : formulaires publics, comptes |
+| `HASH_SECRET`                                 | empreinte des e-mails et IP (anti-abus, vote)    |
+| `RESEND_API_KEY`, `EMAIL_EXPEDITEUR`, `EMAIL_EQUIPE`, `EMAIL_CONFIRMATIONS_ACTIVES` | e-mails |
+| `NEXT_PUBLIC_SHOW_VOTE_RESULTS`               | compteurs de votes visibles (vote désactivé en 2026) |
+
+## Structure
 
 ```
-NEXT_PUBLIC_SHOW_VOTE_RESULTS=true   # afficher les compteurs de vote en temps réel
-OTP_DEMO_CODE=123456                  # code OTP statique pour la V1
-NEXT_PUBLIC_SITE_URL=https://fifawards.gn
-```
-
-### 3. Lancer le serveur de dev
-
-```bash
-npm run dev
-```
-
-Le site est accessible sur **http://localhost:3000**
-
-### 4. Build de production
-
-```bash
-npm run build
-npm run start
-```
-
----
-
-## 📂 Structure
-
-```
+supabase/
+├── migrations/             # schéma de la base (tables, RLS, bucket « medias »)
+└── seed.sql                # données de départ : 4 distinctions, 1 actualité
 src/
-├── app/                    # App Router (Next.js 14)
-│   ├── layout.tsx          # Layout racine : fonts, header, footer, toaster
-│   ├── page.tsx            # Accueil
-│   ├── globals.css         # Variables CSS + Tailwind
-│   ├── sitemap.ts          # Sitemap auto-généré
-│   ├── robots.ts           # Robots.txt auto-généré
-│   ├── a-propos/           # Page À propos
-│   ├── nomines/            # Liste nominés + détail [slug]
-│   ├── voter/              # Système de vote (3 étapes : choix → email → OTP)
-│   ├── candidatures/       # Formulaire 5 étapes
-│   ├── programme/          # Programme 2 jours avec tabs
-│   ├── sponsors/           # 4 paliers de partenariat
-│   ├── billetterie/        # 3 types de billets + formulaire
-│   ├── editions-precedentes/
-│   ├── presse/
-│   ├── blog/               # Liste + [slug]
-│   ├── contact/
-│   └── api/
-│       ├── vote/route.ts          # POST : enregistrer un vote (anti-fraude)
-│       ├── candidature/route.ts   # POST : enregistrer une candidature
-│       ├── billet/route.ts        # POST : réservation de billets
-│       └── contact/route.ts       # POST : message de contact
+├── middleware.ts           # protège /admin (session Supabase)
+├── app/
+│   ├── (site)/             # site public (header + footer)
+│   │   ├── distingues/     # « Les distingués 2026 » (+ fiche [slug])
+│   │   ├── candidatures/   # formulaire en 3 étapes
+│   │   ├── billetterie/    # réservation, confirmation manuelle
+│   │   ├── voter/          # vote du public, masqué si vote_actif = false
+│   │   └── …               # accueil, à propos, programme, sponsors, presse, blog, contact
+│   ├── admin/
+│   │   ├── connexion/      # page de connexion
+│   │   ├── (espace)/       # modules protégés (tableau de bord, distingués, réglages…)
+│   │   └── export/[table]/ # export CSV
+│   └── api/                # candidature, contact, billet, vote (+ vote/code)
 ├── components/
-│   ├── layout/             # Header (responsive), Footer, nav-links
-│   ├── home/               # Hero, Countdown, SponsorsCarousel, etc.
-│   ├── nominees/           # NomineeCard, NomineesGrid (filtre client)
-│   ├── vote/               # VoteForm (multi-étapes)
-│   ├── candidature/        # CandidatureMultiStepForm
-│   ├── billetterie/        # TicketForm
-│   └── ui/                 # Primitives shadcn customisées dark theme
-├── data/                   # JSON files (categories, nominees, sponsors...)
-├── lib/                    # utils, countdown, validations Zod, data, votes
-└── types/                  # Types TS (Nominee, Sponsor, Vote, etc.)
+│   ├── admin/              # formulaires et champs de l'admin, envoi d'images
+│   ├── distingues/         # cartes, grille, photo
+│   └── …
+├── lib/
+│   ├── supabase/           # clients : public, session, service, navigateur
+│   ├── admin/              # authentification et helpers des actions serveur
+│   ├── data.ts             # lecture des contenus (Supabase, ou src/data/ en secours)
+│   ├── email.ts            # Resend
+│   ├── votes.ts            # vote : codes à usage unique, enregistrement
+│   ├── documents.ts        # chemins des PDF officiels (null = « bientôt disponible »)
+│   └── validations.ts      # schémas Zod
+└── data/                   # contenus statiques : programme, billets, éditions précédentes
 ```
 
----
+## Données
 
-## 🎨 Design system
+| Contenu                                   | Source                              | Modifié depuis   |
+| ----------------------------------------- | ----------------------------------- | ---------------- |
+| Distingués, catégories, sponsors, actualités | Supabase                         | `/admin`         |
+| Réglages (interrupteurs, dates, coordonnées, réseaux) | Supabase (`parametres`)  | `/admin/reglages` |
+| Candidatures, messages, réservations      | Supabase                            | `/admin` (lecture, statut, CSV) |
+| Programme, billets, éditions précédentes  | `src/data/*.json`                   | code             |
+| Documents PDF                             | `public/documents/` + `src/lib/documents.ts` | code     |
 
-### Palette
+Les pages publiques sont régénérées toutes les 60 s, et immédiatement après chaque
+modification dans l'admin (`revalidatePath`).
 
-```css
---background-primary: #0A0A0A   /* Noir profond */
---background-secondary: #1A1A1A /* Noir charbon */
---accent-gold: #D4AF37          /* Or, accents et CTA */
---accent-gold-light: #F5D76E    /* Or clair, hover */
---accent-red: #8B0000           /* Rouge bordeaux */
---text-primary: #FFFFFF
---text-secondary: #B0B0B0
---border-color: #2A2A2A
-```
+## Sécurité
 
-### Classes utilitaires
+- **RLS** activée sur toutes les tables : le public ne lit que les contenus publiés.
+  Les distingués publiés restent cachés tant que `distingues_visibles` est faux.
+- Candidatures, messages et réservations : **aucune lecture publique**. L'insertion
+  passe par les routes API avec la clé de service, après validation Zod, **champ
+  anti-robot** et **limitation par IP** (5 envois par fenêtre de 30 à 60 min).
+- Admin : comptes créés par un administrateur uniquement, rôles `admin` et `editeur`
+  vérifiés côté serveur **et** en base (`is_staff()`, `is_admin()`).
+- La clé de service n'est importée que dans des modules `server-only`.
+- `/admin` est exclu des moteurs de recherche (robots.txt, `noindex`).
 
-- `.btn-gold` — CTA principal (dégradé or)
-- `.btn-outline-gold` — CTA secondaire (contour or)
-- `.card-gold` — Carte sombre avec border or au hover
-- `.section` — Padding vertical standard
-- `.section-title` / `.section-subtitle` — Titres de section
+## Vote du public
 
----
+Désactivé pour 2026 mais complet : interrupteur **Vote du public** dans les réglages.
+Parcours : choix → e-mail → code à 6 chiffres envoyé par Resend (valable 10 min,
+3 demandes max par tranche de 10 min) → vote enregistré, un par e-mail et par
+catégorie. Le vote nécessite donc que Resend soit configuré avec un domaine vérifié.
 
-## 🗳️ Système de vote
+## Limites connues et tâches restantes
 
-Le vote suit un parcours en 3 étapes :
+- [ ] **Contenus réels** à saisir : distingués et photos, sponsors, coordonnées,
+      slogan 2026 (voir ci-dessous).
+- [ ] **PDF officiels** (règlement, dossier de candidature, dossier de sponsoring,
+      programme) : à déposer dans `public/documents/`.
+- [ ] **Programme** des 19 et 20 novembre (`src/data/program.json`) et **éditions
+      précédentes** (`src/data/editions.json`) : contenus de démonstration à remplacer.
+- [ ] **Photos** de l'accueil et des éditions précédentes : encore des images Unsplash.
+- [ ] **Nom de domaine** : bloque les e-mails de confirmation (Resend).
+- [ ] **Mentions légales** et **politique de confidentialité** : pages à rédiger
+      (les liens du pied de page pointent vers Contact).
+- Les images remplacées dans l'admin restent dans le stockage (pas de suppression
+  automatique).
+- Hors périmètre pour l'instant : paiement en ligne, CMS d'articles avancé, envoi de
+  fichiers lourds dans les candidatures, statistiques dans l'admin.
 
-1. **Sélection** — catégorie + nominé
-2. **Email** — saisie pour validation
-3. **OTP** — code à 6 chiffres (en V1 : `123456`)
+## Contenus à fournir par le festival
 
-### Règles côté API (`/api/vote`)
+| Contenu        | Éléments attendus                                                    |
+| -------------- | -------------------------------------------------------------------- |
+| Distingués     | nom, catégorie, métier, photo (≥ 800 × 1000 px, JPG/PNG/WebP), citation courte |
+| Sponsors       | nom, palier, logo (PNG transparent de préférence), lien              |
+| Actualités     | titre, date, texte, image                                            |
+| Identité       | logo haute qualité, slogan 2026, PDF officiels                       |
+| Coordonnées    | téléphone, e-mail, WhatsApp, réseaux sociaux, dates des candidatures, programme |
 
-- Validation Zod stricte
-- Vérification que le nominé appartient bien à la catégorie
-- 1 vote max par email × catégorie
-- Cooldown de 60s entre tentatives (sur email OU IP)
-- Hash de l'email et de l'IP (DJB2 non-cryptographique pour la V1)
-- Stockage dans `src/data/votes.json`
-
-### Afficher/masquer les résultats partiels
-
-```env
-NEXT_PUBLIC_SHOW_VOTE_RESULTS=true   # ou false
-```
-
----
-
-## 📅 Prochaines étapes (V2)
-
-Ce qui reste à brancher pour la V2 (post-démo) :
-
-- [ ] Vrai envoi d'email OTP (Resend / SendGrid / SMTP)
-- [ ] Base de données (Vercel Postgres, Supabase) pour les votes et candidatures
-- [ ] Upload de fichiers réels pour les candidatures (S3 / Cloudinary)
-- [ ] Paiement réel pour la billetterie (Orange Money API, Paystack)
-- [ ] CMS pour les nominés et les articles (Sanity, Strapi)
-- [ ] Vraies images Unsplash → photos officielles
-- [ ] Documents PDF (programme, dossier partenariat, kit médias)
-- [ ] Authentification admin pour modération vote
-
----
-
-## 🚢 Déploiement
-
-Recommandation : **Vercel** (zéro config, optimisé pour Next.js).
-
-```bash
-# 1. Push sur GitHub
-git init && git add . && git commit -m "feat: initial commit"
-
-# 2. Importer sur https://vercel.com/new
-# 3. Variables d'environnement (.env.local) → à configurer dans le dashboard Vercel
-# 4. Deploy automatique
-```
-
----
-
-## 📄 Licence
+## Licence
 
 © FIF AWARDS — Comité d'Organisation, 2026. Tous droits réservés.
