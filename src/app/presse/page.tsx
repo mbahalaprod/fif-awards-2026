@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Download, FileText, ImageIcon, Mail } from 'lucide-react';
+import { FileText, ImageIcon, Mail } from 'lucide-react';
+import { DocumentLink } from '@/components/DocumentLink';
+import { DOCUMENTS } from '@/lib/documents';
 
 export const metadata: Metadata = {
   title: 'Espace presse & médias',
@@ -28,21 +30,20 @@ export default function PressePage() {
               Présentation complète du festival, des 4 paliers de sponsoring et des contreparties
               associées.
             </p>
-            <a href="/dossier-partenariat.pdf" className="btn-outline-gold">
-              <Download className="h-4 w-4" /> Télécharger (PDF)
-            </a>
+            <DocumentLink href={DOCUMENTS.dossierSponsoring} label="Télécharger (PDF)" />
           </div>
 
           <div className="card-gold p-8">
             <ImageIcon className="h-8 w-8 text-gold mb-4" />
             <h2 className="font-serif text-2xl text-text-primary mb-3">Kit médias</h2>
             <p className="text-text-secondary text-sm mb-6">
-              Logos HD, charte graphique, photos officielles et visuels prêts à l&apos;emploi pour
-              vos publications.
+              Logo officiel du FIF AWARDS, en version fond clair et fond sombre, prêt à
+              l&apos;emploi pour vos publications.
             </p>
-            <a href="/kit-medias.zip" className="btn-outline-gold">
-              <Download className="h-4 w-4" /> Télécharger (ZIP)
-            </a>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <DocumentLink href="/logo.png" label="Logo fond clair" />
+              <DocumentLink href="/logo-fond-sombre.png" label="Logo fond sombre" />
+            </div>
           </div>
         </div>
 

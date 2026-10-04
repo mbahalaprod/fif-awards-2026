@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, Ticket } from 'lucide-react';
 
-export function Hero() {
+export function Hero({ voteActive, slogan }: { voteActive: boolean; slogan: string }) {
   return (
     <section className="relative h-[100vh] min-h-[640px] flex items-center justify-center overflow-hidden -mt-20">
       {/* Background image (cinematic) */}
@@ -44,7 +44,7 @@ export function Hero() {
           FIF <span className="text-gold">AWARDS</span>
           <br />
           <span className="text-3xl md:text-5xl lg:text-6xl text-text-primary/90 italic">
-            Festival International de Film
+            Festival International du Film
           </span>
         </motion.h1>
 
@@ -54,8 +54,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
           className="font-sans text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Célébrer le cinéma guinéen et toute sa chaîne de valeur — des acteurs aux ingénieurs du
-          son, des scénaristes aux directrices de la photographie.
+          {slogan}
         </motion.p>
 
         <motion.div
@@ -64,11 +63,17 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Link href="/voter" className="btn-gold w-full sm:w-auto">
-            Voter maintenant <ArrowRight className="h-4 w-4" />
-          </Link>
+          {voteActive ? (
+            <Link href="/voter" className="btn-gold w-full sm:w-auto">
+              Voter maintenant <ArrowRight className="h-4 w-4" />
+            </Link>
+          ) : (
+            <Link href="/distingues" className="btn-gold w-full sm:w-auto">
+              Les distingués 2026 <ArrowRight className="h-4 w-4" />
+            </Link>
+          )}
           <Link href="/billetterie" className="btn-outline-gold w-full sm:w-auto">
-            <Ticket className="h-4 w-4" /> Acheter un billet
+            <Ticket className="h-4 w-4" /> Réserver ma place
           </Link>
         </motion.div>
       </div>

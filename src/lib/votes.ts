@@ -1,65 +1,84 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-import type { Vote, VoteCounts } from '@/types/vote';
-import { hashString } from '@/lib/utils';
+import 'server-only';
+import { randomInt } from 'crypto';
+import type { SupabaseClient } from '@supabase/supabase-js';
+import type { VoteCounts } from '@/types/vote';
+import { hashValue } from '@/lib/security';
 
-const VOTES_FILE = path.join(process.cwd(), 'src', 'data', 'votes.json');
+// Vote du public : désactivé pour l'édition 2026 (interrupteur « vote_actif » dans les réglages).
+// Tout passe par la clé de service, les tables votes et codes_otp n'ayant aucune règle RLS publique.
 
-async function readVotes(): Promise<Vote[]> {
-  try {
-    const raw = await fs.readFile(VOTES_FILE, 'utf-8');
-    return JSON.parse(raw) as Vote[];
-  } catch {
-    return [];
+const CODE_TTL_MINUTES = 10;
+const MAX_CODES_PER_WINDOW = 3;
+
+export type CodeRequestResult = { ok: true; code: string } | { ok: false; reason: 'too_many' | 'error' };
+
+export async function createVoteCode(supabase: SupabaseClient, email: string): Promise<CodeRequestResult> {
+  const emailHash = hashValue(email);
+  const since = new Date(Date.now() - CODE_TTL_MINUTES * 60_000).toISOString();
+
+  const { count } = await supabase
+    .from('codes_otp')
+    .select('id', { count: 'exact', head: true })
+    .eq('email_hash', emailHash)
+    .gte('created_at', since);
+  if ((count ?? 0) >= MAX_CODES_PER_WINDOW) return { ok: false, reason: 'too_many' };
+
+  const code = randomInt(0, 1_000_000).toString().padStart(6, '0');
+  const { error } = await supabase.from('codes_otp').insert({
+    email_hash: emailHash,
+    code_hash: hashValue(`${email}:${code}`),
+    expires_at: new Date(Date.now() + CODE_TTL_MINUTES * 60_000).toISOString(),
+  });
+  if (error) {
+    console.error('[vote] création du code :', error);
+    return { ok: false, reason: 'error' };
   }
+  return { ok: true, code };
 }
 
-async function writeVotes(votes: Vote[]): Promise<void> {
-  await fs.writeFile(VOTES_FILE, JSON.stringify(votes, null, 2), 'utf-8');
+/** Vérifie le code et le consomme (un code ne sert qu'une fois). */
+export async function consumeVoteCode(supabase: SupabaseClient, email: string, code: string): Promise<boolean> {
+  const { data } = await supabase
+    .from('codes_otp')
+    .select('id')
+    .eq('email_hash', hashValue(email))
+    .eq('code_hash', hashValue(`${email}:${code}`))
+    .gt('expires_at', new Date().toISOString())
+    .limit(1)
+    .maybeSingle();
+  if (!data) return false;
+  await supabase.from('codes_otp').delete().eq('id', data.id);
+  return true;
 }
 
-export async function hasVotedInCategory(email: string, categoryId: string): Promise<boolean> {
-  const votes = await readVotes();
-  const emailHash = hashString(email.toLowerCase().trim());
-  return votes.some((v) => v.emailHash === emailHash && v.categoryId === categoryId);
+export type RecordVoteResult = 'ok' | 'already_voted' | 'error';
+
+export async function recordVote(
+  supabase: SupabaseClient,
+  params: { email: string; categoryId: string; distingueId: string; ip: string },
+): Promise<RecordVoteResult> {
+  const { error } = await supabase.from('votes').insert({
+    email_hash: hashValue(params.email),
+    categorie_id: params.categoryId,
+    distingue_id: params.distingueId,
+    ip_hash: hashValue(params.ip),
+  });
+  if (!error) return 'ok';
+  // 23505 : contrainte d'unicité (email_hash, categorie_id) → déjà voté.
+  if (error.code === '23505') return 'already_voted';
+  console.error('[vote] enregistrement :', error);
+  return 'error';
 }
 
-export async function getLastVoteAttempt(email: string, ip: string): Promise<Vote | null> {
-  const votes = await readVotes();
-  const emailHash = hashString(email.toLowerCase().trim());
-  const ipHash = hashString(ip);
-  const recent = votes
-    .filter((v) => v.emailHash === emailHash || v.ipHash === ipHash)
-    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-  return recent[0] ?? null;
-}
-
-export async function recordVote(params: {
-  email: string;
-  categoryId: string;
-  nomineeId: string;
-  ip: string;
-}): Promise<Vote> {
-  const votes = await readVotes();
-  const vote: Vote = {
-    id: `vote-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-    email: params.email.toLowerCase().trim(),
-    emailHash: hashString(params.email.toLowerCase().trim()),
-    categoryId: params.categoryId,
-    nomineeId: params.nomineeId,
-    ipHash: hashString(params.ip),
-    timestamp: new Date().toISOString(),
-  };
-  votes.push(vote);
-  await writeVotes(votes);
-  return vote;
-}
-
-export async function getVoteCounts(): Promise<VoteCounts> {
-  const votes = await readVotes();
+export async function getVoteCounts(supabase: SupabaseClient): Promise<VoteCounts> {
+  const { data, error } = await supabase.from('votes').select('distingue_id');
+  if (error) {
+    console.error('[vote] comptage :', error);
+    return {};
+  }
   const counts: VoteCounts = {};
-  for (const v of votes) {
-    counts[v.nomineeId] = (counts[v.nomineeId] ?? 0) + 1;
+  for (const row of data as { distingue_id: string }[]) {
+    counts[row.distingue_id] = (counts[row.distingue_id] ?? 0) + 1;
   }
   return counts;
 }

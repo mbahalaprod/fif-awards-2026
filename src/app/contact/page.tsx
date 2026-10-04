@@ -1,13 +1,16 @@
 import type { Metadata } from 'next';
-import { MapPin, Mail, Phone, Facebook, Instagram, Youtube } from 'lucide-react';
+import { MapPin, Mail, Phone } from 'lucide-react';
 import { ContactForm } from '@/components/ContactForm';
+import { SocialLinks } from '@/components/layout/SocialLinks';
+import { getSettings } from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'Contact',
   description: 'Contactez l\'équipe du FIF AWARDS 2026 — candidatures, partenariats, presse.',
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const settings = await getSettings();
   return (
     <section className="section">
       <div className="container mx-auto px-4">
@@ -27,51 +30,41 @@ export default function ContactPage() {
               <ul className="space-y-4 text-sm">
                 <li className="flex items-start gap-3">
                   <MapPin className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-text-primary">Radisson Blu Hôtel Conakry</p>
-                    <p className="text-text-secondary">Corniche Sud, Conakry, Guinée</p>
-                  </div>
+                  <p className="text-text-primary">{settings.address}</p>
                 </li>
-                <li className="flex items-start gap-3">
-                  <Mail className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                  <a
-                    href="mailto:contact@fifawards.gn"
-                    className="text-text-primary hover:text-gold transition-colors"
-                  >
-                    contact@fifawards.gn
-                  </a>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Phone className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                  <a
-                    href="tel:+224000000000"
-                    className="text-text-primary hover:text-gold transition-colors"
-                  >
-                    +224 000 000 000
-                  </a>
-                </li>
+                {settings.email && (
+                  <li className="flex items-start gap-3">
+                    <Mail className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                    <a
+                      href={`mailto:${settings.email}`}
+                      className="text-text-primary hover:text-gold transition-colors break-all"
+                    >
+                      {settings.email}
+                    </a>
+                  </li>
+                )}
+                {settings.phone && (
+                  <li className="flex items-start gap-3">
+                    <Phone className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                    <a
+                      href={`tel:${settings.phone.replace(/\s/g, '')}`}
+                      className="text-text-primary hover:text-gold transition-colors"
+                    >
+                      {settings.phone}
+                    </a>
+                  </li>
+                )}
               </ul>
-              <div className="flex items-center gap-3 mt-6 pt-6 border-t border-border">
-                {[
-                  { icon: Facebook, label: 'Facebook' },
-                  { icon: Instagram, label: 'Instagram' },
-                  { icon: Youtube, label: 'YouTube' },
-                ].map(({ icon: Icon, label }) => (
-                  <a
-                    key={label}
-                    href="#"
-                    aria-label={label}
-                    className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-text-secondary hover:text-gold hover:border-gold transition-colors"
-                  >
-                    <Icon className="h-4 w-4" />
-                  </a>
-                ))}
-              </div>
+              <SocialLinks
+                settings={settings}
+                size="md"
+                className="mt-6 pt-6 border-t border-border"
+              />
             </div>
 
             <div className="card-gold overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3973.0!2d-13.7!3d9.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sRadisson%20Blu%20Hotel%20Conakry!5e0!3m2!1sfr!2sgn!4v1700000000000"
+                src="https://www.google.com/maps?q=Radisson+Blu+Hotel+Conakry&output=embed"
                 title="Radisson Blu Conakry"
                 width="100%"
                 height="280"

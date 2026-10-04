@@ -1,82 +1,30 @@
 [
   {
-    "id": "cat-01",
-    "slug": "meilleur-film",
-    "name": "Meilleur Film",
-    "description": "Récompense l'œuvre cinématographique la plus marquante de l'année, toutes équipes confondues.",
-    "icon": "Film",
+    "id": "metiers-talents-techniques",
+    "slug": "metiers-talents-techniques",
+    "name": "Métiers et Talents Techniques du Cinéma",
+    "description": "Réalisateurs, scénaristes, producteurs, directeurs de la photographie, cadreurs, monteurs, ingénieurs du son, costumiers, maquilleurs, décorateurs : celles et ceux qui fabriquent les films.",
     "order": 1
   },
   {
-    "id": "cat-02",
-    "slug": "meilleure-serie",
-    "name": "Meilleure Série",
-    "description": "Distingue la production sérielle qui s'est imposée par sa qualité narrative et visuelle.",
-    "icon": "Tv",
+    "id": "pionniers-cinema-guineen-africain",
+    "slug": "pionniers-cinema-guineen-africain",
+    "name": "Pionniers du Cinéma Guinéen et Africain",
+    "description": "Hommage aux figures qui ont ouvert la voie et bâti l'histoire du cinéma guinéen et africain.",
     "order": 2
   },
   {
-    "id": "cat-03",
-    "slug": "meilleur-acteur",
-    "name": "Meilleur Acteur",
-    "description": "Salue la performance masculine la plus remarquable de la saison cinématographique.",
-    "icon": "User",
+    "id": "bravoure-leadership-feminin",
+    "slug": "bravoure-leadership-feminin",
+    "name": "Bravoure & Leadership Féminin dans le Cinéma Africain",
+    "description": "Distinction des femmes qui portent, dirigent et transforment le cinéma africain.",
     "order": 3
   },
   {
-    "id": "cat-04",
-    "slug": "meilleure-actrice",
-    "name": "Meilleure Actrice",
-    "description": "Salue la performance féminine la plus remarquable de la saison cinématographique.",
-    "icon": "User",
+    "id": "institutions-mecenes-medias",
+    "slug": "institutions-mecenes-medias",
+    "name": "Institutions, Mécènes & Médias au Service du Cinéma",
+    "description": "Reconnaissance des institutions, mécènes et médias qui soutiennent et font rayonner le septième art.",
     "order": 4
-  },
-  {
-    "id": "cat-05",
-    "slug": "meilleure-realisation",
-    "name": "Meilleure Réalisation",
-    "description": "Honore la vision artistique et la maîtrise technique d'un ou d'une réalisateur·rice.",
-    "icon": "Clapperboard",
-    "order": 5
-  },
-  {
-    "id": "cat-06",
-    "slug": "meilleur-montage",
-    "name": "Meilleur Montage",
-    "description": "Reconnaît l'art du rythme et de la narration porté par les monteurs et monteuses.",
-    "icon": "Scissors",
-    "order": 6
-  },
-  {
-    "id": "cat-07",
-    "slug": "meilleure-photographie",
-    "name": "Meilleure Direction de la Photographie",
-    "description": "Célèbre l'écriture lumière et la composition visuelle qui sublime l'œuvre.",
-    "icon": "Camera",
-    "order": 7
-  },
-  {
-    "id": "cat-08",
-    "slug": "meilleur-son",
-    "name": "Meilleur Son",
-    "description": "Récompense l'ingénierie sonore et la conception audio dans toute leur dimension immersive.",
-    "icon": "Mic",
-    "order": 8
-  },
-  {
-    "id": "cat-09",
-    "slug": "meilleur-scenario",
-    "name": "Meilleur Scénario",
-    "description": "Distingue l'écriture, la dramaturgie et la profondeur des dialogues d'une œuvre.",
-    "icon": "PenTool",
-    "order": 9
-  },
-  {
-    "id": "cat-10",
-    "slug": "prix-special-jury",
-    "name": "Prix Spécial du Jury",
-    "description": "Coup de cœur du jury pour une œuvre, un talent ou une démarche audacieuse hors catégorie.",
-    "icon": "Award",
-    "order": 10
   }
 ]

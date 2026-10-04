@@ -1,6 +1,6 @@
 # FIF AWARDS 2026 — Site officiel
 
-> Site web officiel du **Festival International de Film AWARDS** — 4ᵉ édition.
+> Site web officiel du **Festival International du Film AWARDS** — 4ᵉ édition.
 > Les **19 et 20 novembre 2026** à l'hôtel **Radisson Blu de Conakry**, en Guinée.
 
 ---

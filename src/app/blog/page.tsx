@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, Clock } from 'lucide-react';
 import { getArticles } from '@/lib/data';
-import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
 
 export const metadata: Metadata = {
@@ -11,15 +10,8 @@ export const metadata: Metadata = {
   description: 'Toutes les actualités, portraits et annonces du FIF AWARDS 2026.',
 };
 
-const categoryLabels: Record<string, string> = {
-  annonces: 'Annonce',
-  portraits: 'Portrait',
-  programme: 'Programme',
-  coulisses: 'Coulisses',
-};
-
-export default function BlogPage() {
-  const articles = getArticles();
+export default async function BlogPage() {
+  const articles = await getArticles();
 
   return (
     <section className="section">
@@ -28,10 +20,14 @@ export default function BlogPage() {
           <p className="section-subtitle">Le journal du festival</p>
           <h1 className="section-title mb-6">Actualités</h1>
           <p className="text-text-secondary text-lg">
-            Annonces officielles, portraits de nominés, coulisses des préparatifs et programme : la
+            Annonces officielles, portraits des distingués, coulisses des préparatifs et programme : la
             vie du festival, racontée au fil des semaines.
           </p>
         </div>
+
+        {articles.length === 0 && (
+          <p className="text-center text-text-secondary">Les premières actualités arrivent bientôt.</p>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {articles.map((article) => (
@@ -40,15 +36,18 @@ export default function BlogPage() {
               href={`/blog/${article.slug}`}
               className="card-gold group overflow-hidden flex flex-col"
             >
-              <div className="relative aspect-video overflow-hidden">
+              <div className="relative aspect-video overflow-hidden bg-background-primary">
                 <Image
-                  src={article.imageUrl}
+                  src={article.imageUrl ?? '/logo-fond-sombre.png'}
                   alt={article.title}
                   fill
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className={
+                    article.imageUrl
+                      ? 'object-cover transition-transform duration-700 group-hover:scale-105'
+                      : 'object-contain p-10'
+                  }
                 />
-                <Badge className="absolute top-4 left-4">{categoryLabels[article.category]}</Badge>
               </div>
               <div className="p-6 flex-1 flex flex-col">
                 <h2 className="font-serif text-xl text-text-primary mb-3 leading-tight group-hover:text-gold transition-colors">

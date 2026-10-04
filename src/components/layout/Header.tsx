@@ -1,14 +1,19 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { navLinks } from './nav-links';
+import { getNavLinks } from './nav-links';
 
-export function Header() {
+export function Header({ voteActive }: { voteActive: boolean }) {
+  const navLinks = getNavLinks(voteActive);
+  const cta = voteActive
+    ? { href: '/voter', label: 'Voter', mobileLabel: 'Voter maintenant' }
+    : { href: '/billetterie', label: 'Réserver', mobileLabel: 'Réserver ma place' };
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -48,9 +53,14 @@ export function Header() {
       <div className="container mx-auto flex items-center justify-between h-20 px-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <span className="font-serif text-xl md:text-2xl text-gold tracking-tight">
-            FIF<span className="text-text-primary"> AWARDS</span>
-          </span>
+          <Image
+            src="/logo-fond-sombre.png"
+            alt="FIF Awards"
+            width={120}
+            height={60}
+            priority
+            className="h-12 w-auto"
+          />
           <span className="hidden md:inline-block text-xs uppercase tracking-[0.2em] text-text-secondary ml-2 border-l border-border pl-2">
             2026
           </span>
@@ -77,8 +87,8 @@ export function Header() {
 
         {/* CTA + Mobile toggle */}
         <div className="flex items-center gap-3">
-          <Link href="/voter" className="hidden md:inline-flex btn-gold !px-6 !py-3 !text-xs">
-            Voter
+          <Link href={cta.href} className="hidden md:inline-flex btn-gold !px-6 !py-3 !text-xs">
+            {cta.label}
           </Link>
           <button
             type="button"
@@ -120,8 +130,8 @@ export function Header() {
                 );
               })}
               <li className="pt-6">
-                <Link href="/voter" className="btn-gold w-full">
-                  Voter maintenant
+                <Link href={cta.href} className="btn-gold w-full">
+                  {cta.mobileLabel}
                 </Link>
               </li>
             </ul>

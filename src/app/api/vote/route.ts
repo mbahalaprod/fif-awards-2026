@@ -1,25 +1,24 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { voteSchema } from '@/lib/validations';
-import { hasVotedInCategory, getLastVoteAttempt, recordVote, getVoteCounts } from '@/lib/votes';
-import { getNomineesByCategory } from '@/lib/data';
+import { jsonError } from '@/lib/api';
+import { getDistingues, getSettings } from '@/lib/data';
+import { createServiceClient, isServiceConfigured } from '@/lib/supabase/service';
+import { consumeVoteCode, getVoteCounts, recordVote } from '@/lib/votes';
+import { getClientIp } from '@/lib/security';
 
-const COOLDOWN_MS = 60_000; // 60s between attempts
-const OTP_CODE = process.env.OTP_DEMO_CODE ?? '123456';
+export const dynamic = 'force-dynamic';
 
-function getClientIp(req: NextRequest): string {
-  const forwarded = req.headers.get('x-forwarded-for');
-  if (forwarded) return forwarded.split(',')[0].trim();
-  return req.headers.get('x-real-ip') ?? 'unknown';
-}
-
+/** Étape 3 du vote : vérifie le code reçu par email et enregistre le vote. */
 export async function POST(req: NextRequest) {
+  if (!(await getSettings()).voteActive) return jsonError('Le vote est fermé.', 403);
+  if (!isServiceConfigured()) return jsonError('Le vote est momentanément indisponible.', 503);
+
   let body: unknown;
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: 'Requête invalide.' }, { status: 400 });
+    return jsonError('Requête invalide.', 400);
   }
-
   const parsed = voteSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(
@@ -27,56 +26,29 @@ export async function POST(req: NextRequest) {
       { status: 400 },
     );
   }
+  const { email, categoryId, distingueId, code } = parsed.data;
 
-  const { email, categoryId, nomineeId, otp } = parsed.data;
+  const eligible = (await getDistingues()).some(
+    (d) => d.id === distingueId && d.categoryId === categoryId,
+  );
+  if (!eligible) return jsonError("Ce choix n'appartient pas à la catégorie sélectionnée.", 400);
 
-  // 1. OTP check (V1: code statique)
-  if (otp !== OTP_CODE) {
-    return NextResponse.json(
-      { error: 'Code de validation incorrect. Astuce démo : 123456.' },
-      { status: 401 },
-    );
+  const supabase = createServiceClient();
+  if (!(await consumeVoteCode(supabase, email, code))) {
+    return jsonError('Code de validation incorrect ou expiré.', 401);
   }
 
-  // 2. Nominee belongs to category?
-  const eligible = getNomineesByCategory(categoryId).some((n) => n.id === nomineeId);
-  if (!eligible) {
-    return NextResponse.json(
-      { error: 'Ce nominé n\'appartient pas à la catégorie sélectionnée.' },
-      { status: 400 },
-    );
-  }
-
-  // 3. Already voted in this category?
-  const alreadyVoted = await hasVotedInCategory(email, categoryId);
-  if (alreadyVoted) {
-    return NextResponse.json(
-      { error: 'Vous avez déjà voté dans cette catégorie.' },
-      { status: 409 },
-    );
-  }
-
-  // 4. Cooldown
-  const ip = getClientIp(req);
-  const last = await getLastVoteAttempt(email, ip);
-  if (last) {
-    const elapsed = Date.now() - new Date(last.timestamp).getTime();
-    if (elapsed < COOLDOWN_MS) {
-      const waitSec = Math.ceil((COOLDOWN_MS - elapsed) / 1000);
-      return NextResponse.json(
-        { error: `Veuillez patienter ${waitSec}s avant un nouveau vote.` },
-        { status: 429 },
-      );
-    }
-  }
-
-  // 5. Record vote
-  await recordVote({ email, categoryId, nomineeId, ip });
+  const result = await recordVote(supabase, { email, categoryId, distingueId, ip: getClientIp(req) });
+  if (result === 'already_voted') return jsonError('Vous avez déjà voté dans cette catégorie.', 409);
+  if (result === 'error') return jsonError("Le vote n'a pas pu être enregistré.", 500);
 
   return NextResponse.json({ success: true, message: 'Votre vote a bien été enregistré. Merci !' });
 }
 
 export async function GET() {
-  const counts = await getVoteCounts();
-  return NextResponse.json({ counts });
+  const showResults = process.env.NEXT_PUBLIC_SHOW_VOTE_RESULTS === 'true';
+  if (!showResults || !(await getSettings()).voteActive || !isServiceConfigured()) {
+    return NextResponse.json({ counts: {} });
+  }
+  return NextResponse.json({ counts: await getVoteCounts(createServiceClient()) });
 }

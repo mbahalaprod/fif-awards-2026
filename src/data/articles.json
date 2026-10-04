@@ -1,74 +1,10 @@
 [
   {
-    "id": "art-01",
-    "slug": "ouverture-billetterie-4e-edition",
-    "title": "La billetterie de la 4ᵉ édition du FIF AWARDS est ouverte",
-    "excerpt": "À cent jours de la cérémonie au Radisson Blu de Conakry, le Comité d'Organisation annonce l'ouverture officielle de la billetterie en ligne et précise les conditions d'accès.",
-    "content": "Le Comité d'Organisation du FIF AWARDS a le plaisir d'annoncer l'ouverture officielle de la billetterie en ligne pour la 4ᵉ édition du festival, qui se tiendra les 19 et 20 novembre 2026 à l'hôtel Radisson Blu de Conakry. Trois formules sont proposées : Standard, VIP et Premium. Chaque type de billet ouvre l'accès à un périmètre différent de l'événement, du tapis rouge à l'after-party officielle.\n\nNous attendons cette année plus de 1 800 invités, dont une large délégation internationale composée de cinéastes, productrices, journalistes spécialisés et représentants institutionnels. Le festival continue ainsi de gagner en visibilité et en attractivité, dans la lignée des éditions précédentes.\n\nNous invitons toutes celles et ceux qui souhaitent réserver à le faire rapidement : les places Premium sont limitées et partent traditionnellement très vite. Plusieurs modes de paiement sont acceptés, dont Orange Money, mobile money et virement bancaire.",
-    "category": "annonces",
-    "author": "Comité d'Organisation",
-    "publishedAt": "2026-08-12",
-    "imageUrl": "https://images.unsplash.com/photo-1542204165-65bf26472b9b?w=1200&q=80",
-    "readingTime": 3
-  },
-  {
-    "id": "art-02",
-    "slug": "portrait-mariama-diallo",
-    "title": "Portrait : Mariama Diallo, la voix du Fouta",
-    "excerpt": "Comédienne de théâtre devenue figure incontournable du cinéma guinéen, Mariama Diallo est nominée cette année pour Meilleure Actrice. Rencontre.",
-    "content": "Lorsqu'on rencontre Mariama Diallo dans son atelier de Coronthie, on est d'abord frappé par la précision de sa parole. Comédienne formée à la Compagnie Nimba, elle a derrière elle plus de vingt rôles au théâtre avant que le grand public ne la découvre, en 2025, dans Les Collines de Fouta.\n\n« Le théâtre, c'est ma maison, raconte-t-elle. Mais le cinéma, c'est une autre langue. On apprend à se taire, à laisser le silence parler. » Dans Les Collines de Fouta, son personnage de grand-mère traverse trois générations sans presque élever la voix. Une économie de moyens qui a séduit le jury de présélection du FIF AWARDS.\n\nÀ l'aube de cette 4ᵉ édition, Mariama Diallo se prépare à monter sur la scène du Radisson Blu. Quel que soit le verdict du public, elle confie déjà préparer un nouveau projet, cette fois derrière la caméra. Une transition discrète, à son image.",
-    "category": "portraits",
-    "author": "Rédaction FIF AWARDS",
-    "publishedAt": "2026-10-02",
-    "imageUrl": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1200&q=80",
-    "readingTime": 5
-  },
-  {
-    "id": "art-03",
-    "slug": "appel-candidatures-2026",
-    "title": "Appel à candidatures : déposez vos œuvres jusqu'au 30 septembre",
-    "excerpt": "Cinéastes, comédiennes, techniciens du son, monteurs, scénaristes : les candidatures pour la 4ᵉ édition du FIF AWARDS sont ouvertes jusqu'au 30 septembre 2026.",
-    "content": "Le FIF AWARDS lance officiellement son appel à candidatures pour la 4ᵉ édition. Toutes les œuvres produites ou diffusées entre le 1ᵉʳ octobre 2025 et le 30 septembre 2026 sont éligibles, dans dix catégories distinctes.\n\nNous tenons à le rappeler : le FIF AWARDS récompense l'ensemble de la chaîne de valeur du cinéma. Les acteurs et actrices, bien sûr, mais aussi les réalisateurs, monteurs, directeurs et directrices de la photographie, ingénieurs du son, scénaristes et tous les métiers techniques. Le talent ne se limite pas à ce qui est devant l'objectif.\n\nLe formulaire de candidature en ligne a été conçu pour être accessible et clair. Toutes les informations pratiques sont disponibles sur la page Candidatures du site.",
-    "category": "annonces",
-    "author": "Comité d'Organisation",
-    "publishedAt": "2026-07-01",
-    "imageUrl": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200&q=80",
-    "readingTime": 4
-  },
-  {
-    "id": "art-04",
-    "slug": "coulisses-tapis-rouge",
-    "title": "Coulisses : comment se prépare un tapis rouge",
-    "excerpt": "Six mois de préparation, deux régisseurs, vingt-trois mètres de tapis et un protocole millimétré. Plongée dans les coulisses du tapis rouge du FIF AWARDS.",
-    "content": "Le tapis rouge, c'est trois heures sous les projecteurs. C'est aussi six mois de préparation invisible. Pour la 4ᵉ édition, le Comité d'Organisation a confié la régie générale à une équipe dédiée, qui pilote chaque détail : ordre d'arrivée des nominés, points photo, gestion des médias, fluidité de la circulation.\n\nLes vingt-trois mètres de tapis, livrés trois jours avant l'événement, sont posés au millimètre. Les barrières et les espaces presse sont calibrés pour que chaque équipe puisse travailler sans gêner les invités. Au moindre imprévu — averse, retard, sortie média — un plan B est prêt.\n\n« Notre objectif, c'est que le public à la maison ne voie jamais le travail », résume la régisseuse générale. Tout l'art du dispositif tient dans cette discrétion.",
-    "category": "coulisses",
-    "author": "Rédaction FIF AWARDS",
-    "publishedAt": "2026-09-18",
-    "imageUrl": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80",
-    "readingTime": 6
-  },
-  {
-    "id": "art-05",
-    "slug": "programme-soiree-devoile",
-    "title": "Le programme complet des deux soirées dévoilé",
-    "excerpt": "Du tapis rouge à l'after-party, voici le déroulé heure par heure des 19 et 20 novembre 2026. Performances live, hommages et grandes annonces au programme.",
-    "content": "Le Comité d'Organisation a dévoilé le programme officiel de la 4ᵉ édition. Deux soirées rythmées : une première journée consacrée à l'avant-première du film d'ouverture et au cocktail des cinéastes, et une seconde dédiée à la grande cérémonie de remise des prix.\n\nLa cérémonie du 20 novembre alternera moments de remises, performances live et hommages. Plusieurs surprises sont annoncées, notamment un moment de mémoire pour les figures du cinéma disparues au cours de l'année.\n\nLe programme détaillé, heure par heure, est désormais accessible sur la page Programme du site. Un PDF téléchargeable est également mis à disposition pour les médias et partenaires.",
-    "category": "programme",
-    "author": "Comité d'Organisation",
-    "publishedAt": "2026-10-15",
-    "imageUrl": "https://images.unsplash.com/photo-1574267432553-4b4628081c31?w=1200&q=80",
-    "readingTime": 4
-  },
-  {
-    "id": "art-06",
-    "slug": "vote-public-ouvert",
-    "title": "Le vote du public est ouvert : à vous de choisir vos favoris",
-    "excerpt": "Pour la première fois, le grand public peut voter en ligne dans toutes les catégories. Mode d'emploi pour faire compter votre voix.",
-    "content": "Le FIF AWARDS franchit cette année une nouvelle étape : le vote du public est ouvert à toutes les catégories. Sur la page Voter du site, chaque internaute peut sélectionner sa catégorie favorite, découvrir les nominés et exprimer son choix après une validation par email.\n\nUn email, une catégorie, un vote : c'est la règle. Le système garantit l'unicité de chaque suffrage tout en restant simple d'utilisation. Les résultats partiels peuvent être affichés en temps réel, à la discrétion du Comité d'Organisation.\n\nNous espérons que cette ouverture renforcera le lien entre les œuvres, les artistes et le public guinéen — qui est, depuis quatre éditions, le véritable cœur battant du festival.",
-    "category": "annonces",
-    "author": "Comité d'Organisation",
-    "publishedAt": "2026-10-20",
-    "imageUrl": "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1200&q=80",
-    "readingTime": 3
+    "id": "quatre-distinctions-honneur-2026",
+    "slug": "quatre-distinctions-honneur-2026",
+    "title": "FIF AWARDS 2026 : les quatre distinctions d'honneur",
+    "publishedAt": "2026-10-04",
+    "content": "Pour sa 4ᵉ édition, les 19 et 20 novembre 2026 au Radisson Blu de Conakry, le FIF AWARDS met à l'honneur quatre distinctions : Métiers et Talents Techniques du Cinéma ; Pionniers du Cinéma Guinéen et Africain ; Bravoure & Leadership Féminin dans le Cinéma Africain ; Institutions, Mécènes & Médias au Service du Cinéma.\n\nLes distingués 2026 sont choisis par le Comité d'Organisation. Leurs noms seront publiés sur ce site avant la cérémonie, lors d'une annonce publique.",
+    "imageUrl": null
   }
 ]

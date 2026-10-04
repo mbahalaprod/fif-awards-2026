@@ -6,7 +6,7 @@ import { getEditions } from '@/lib/data';
 export const metadata: Metadata = {
   title: 'À propos du FIF AWARDS',
   description:
-    'Histoire, vision et valeurs du Festival International de Film AWARDS. Découvrez le projet porté par le Comité d\'Organisation depuis 2023.',
+    'Histoire, vision et valeurs du Festival International du Film AWARDS. Découvrez le projet porté par le Comité d\'Organisation depuis 2023.',
 };
 
 export default function AProposPage() {
@@ -23,7 +23,7 @@ export default function AProposPage() {
 
         <div className="prose prose-invert max-w-none text-text-secondary leading-relaxed space-y-6 mb-16">
           <p className="text-xl text-text-primary">
-            Le Festival International de Film AWARDS est né d&apos;une conviction simple : le cinéma
+            Le Festival International du Film AWARDS est né d&apos;une conviction simple : le cinéma
             guinéen mérite son écrin. Une scène où l&apos;on célèbre les œuvres, mais aussi celles et
             ceux qui les rendent possibles.
           </p>
@@ -35,7 +35,7 @@ export default function AProposPage() {
             seulement ce qui se passe devant l&apos;objectif.
           </p>
           <p>
-            Quatre éditions, dix catégories, et un objectif partagé : faire rayonner la création
+            Quatre éditions, quatre distinctions d&apos;honneur en 2026, et un objectif partagé : faire rayonner la création
             audiovisuelle guinéenne, en Guinée et au-delà.
           </p>
         </div>

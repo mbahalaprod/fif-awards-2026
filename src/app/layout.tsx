@@ -4,17 +4,22 @@ import { Toaster } from 'sonner';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { getSettings } from '@/lib/data';
+
+// Les contenus viennent de Supabase : on régénère les pages au plus toutes les 60 s.
+// L'espace d'administration force aussi la mise à jour après chaque modification.
+export const revalidate = 60;
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fifawards.gn';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'FIF AWARDS 2026 — 4ᵉ édition du Festival International de Film',
+    default: 'FIF AWARDS 2026 — 4ᵉ édition du Festival International du Film',
     template: '%s | FIF AWARDS 2026',
   },
   description:
-    "Festival International de Film AWARDS, 4ᵉ édition. Les 19 et 20 novembre 2026 à Conakry, au Radisson Blu. Célébrer toute la chaîne de valeur du cinéma guinéen.",
+    "Festival International du Film AWARDS, 4ᵉ édition. Les 19 et 20 novembre 2026 à Conakry, au Radisson Blu. Célébrer toute la chaîne de valeur du cinéma guinéen.",
   keywords: [
     'FIF AWARDS',
     'cinéma guinéen',
@@ -32,12 +37,12 @@ export const metadata: Metadata = {
     siteName: 'FIF AWARDS 2026',
     title: 'FIF AWARDS 2026 — 4ᵉ édition',
     description:
-      'Festival International de Film AWARDS, 4ᵉ édition. Les 19 et 20 novembre 2026 à Conakry.',
+      'Festival International du Film AWARDS, 4ᵉ édition. Les 19 et 20 novembre 2026 à Conakry.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'FIF AWARDS 2026',
-    description: '4ᵉ édition du Festival International de Film, Conakry, 19-20 novembre 2026.',
+    description: '4ᵉ édition du Festival International du Film, Conakry, 19-20 novembre 2026.',
   },
   robots: {
     index: true,
@@ -45,11 +50,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSettings();
   return (
     <html lang="fr">
       <head>
@@ -61,9 +67,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-background-primary text-text-primary antialiased">
-        <Header />
+        <Header voteActive={settings.voteActive} />
         <main className="pt-20">{children}</main>
-        <Footer />
+        <Footer settings={settings} />
         <Toaster theme="dark" position="top-right" richColors />
       </body>
     </html>

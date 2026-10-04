@@ -20,8 +20,8 @@ export default function BilletteriePage() {
           <p className="section-subtitle">Cérémonie du 20 novembre 2026</p>
           <h1 className="section-title mb-6">Billetterie officielle</h1>
           <p className="text-text-secondary text-lg">
-            Trois formules pour vivre la cérémonie selon vos envies — du tapis rouge à
-            l&apos;after-party officielle.
+            Trois formules pour vivre la cérémonie selon vos envies. Les réservations sont
+            confirmées manuellement par notre équipe : aucun paiement en ligne.
           </p>
         </div>
 

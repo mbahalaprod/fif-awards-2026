@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
-import { Calendar, MapPin, Clock, Download } from 'lucide-react';
+import { DocumentLink } from '@/components/DocumentLink';
+import { DOCUMENTS } from '@/lib/documents';
+import { Calendar, MapPin, Clock } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { getProgramByDay } from '@/lib/data';
@@ -88,7 +90,7 @@ export default function ProgrammePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
           <div className="card-gold overflow-hidden">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3973.0!2d-13.7!3d9.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sRadisson%20Blu%20Hotel%20Conakry!5e0!3m2!1sfr!2sgn!4v1700000000000"
+              src="https://www.google.com/maps?q=Radisson+Blu+Hotel+Conakry&output=embed"
               title="Radisson Blu Conakry"
               width="100%"
               height="320"
@@ -102,13 +104,11 @@ export default function ProgrammePage() {
             <p className="text-text-secondary text-sm mb-6">
               Version PDF imprimable du programme officiel, pratique à conserver et à partager.
             </p>
-            <a
-              href="/programme.pdf"
+            <DocumentLink
+              href={DOCUMENTS.programme}
+              label="Programme (PDF)"
               className="btn-outline-gold self-start"
-              aria-label="Télécharger le programme officiel au format PDF"
-            >
-              <Download className="h-4 w-4" /> PDF (à venir)
-            </a>
+            />
           </div>
         </div>
       </div>

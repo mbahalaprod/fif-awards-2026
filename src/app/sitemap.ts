@@ -1,15 +1,21 @@
 import type { MetadataRoute } from 'next';
-import { getNominees, getArticles } from '@/lib/data';
+import { getArticles, getDistingues, getSettings } from '@/lib/data';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fifawards.gn';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const [settings, distingues, articles] = await Promise.all([
+    getSettings(),
+    getDistingues(),
+    getArticles(),
+  ]);
+
   const staticRoutes = [
     '',
     '/a-propos',
-    '/nomines',
-    '/voter',
+    '/distingues',
+    ...(settings.voteActive ? ['/voter'] : []),
     '/candidatures',
     '/programme',
     '/sponsors',
@@ -25,19 +31,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === '' ? 1 : 0.7,
   }));
 
-  const nomineeRoutes = getNominees().map((n) => ({
-    url: `${SITE_URL}/nomines/${n.slug}`,
+  const distingueRoutes = distingues.map((d) => ({
+    url: `${SITE_URL}/distingues/${d.slug}`,
     lastModified: now,
     changeFrequency: 'monthly' as const,
     priority: 0.6,
   }));
 
-  const articleRoutes = getArticles().map((a) => ({
+  const articleRoutes = articles.map((a) => ({
     url: `${SITE_URL}/blog/${a.slug}`,
     lastModified: new Date(a.publishedAt),
     changeFrequency: 'monthly' as const,
     priority: 0.5,
   }));
 
-  return [...staticRoutes, ...nomineeRoutes, ...articleRoutes];
+  return [...staticRoutes, ...distingueRoutes, ...articleRoutes];
 }

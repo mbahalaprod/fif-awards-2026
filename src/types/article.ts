@@ -1,14 +1,11 @@
-export type ArticleCategory = 'annonces' | 'portraits' | 'programme' | 'coulisses';
-
 export interface Article {
   id: string;
   slug: string;
   title: string;
-  excerpt: string;
-  content: string;
-  category: ArticleCategory;
-  author: string;
+  /** Date de publication (AAAA-MM-JJ). */
   publishedAt: string;
-  imageUrl: string;
+  content: string;
+  excerpt: string;
+  imageUrl: string | null;
   readingTime: number;
 }

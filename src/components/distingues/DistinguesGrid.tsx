@@ -1,39 +1,29 @@
 'use client';
 
 import { useState } from 'react';
-import { NomineeCard } from './NomineeCard';
+import { DistingueCard } from './DistingueCard';
 import { cn } from '@/lib/utils';
-import type { Nominee } from '@/types/nominee';
+import type { Distingue } from '@/types/distingue';
 import type { Category } from '@/types/category';
 
-interface NomineesGridProps {
-  nominees: Nominee[];
+interface DistinguesGridProps {
+  distingues: Distingue[];
   categories: Category[];
 }
 
-export function NomineesGrid({ nominees, categories }: NomineesGridProps) {
+export function DistinguesGrid({ distingues, categories }: DistinguesGridProps) {
   const [activeCategory, setActiveCategory] = useState<string>('all');
 
   const filtered =
-    activeCategory === 'all' ? nominees : nominees.filter((n) => n.categoryId === activeCategory);
+    activeCategory === 'all'
+      ? distingues
+      : distingues.filter((d) => d.categoryId === activeCategory);
+  const categoryName = (id: string) => categories.find((c) => c.id === id)?.name;
 
   return (
     <div>
-      {/* Category filter */}
       <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-12">
-        <button
-          type="button"
-          onClick={() => setActiveCategory('all')}
-          className={cn(
-            'px-4 py-2 text-xs uppercase tracking-wider rounded-full border transition-colors',
-            activeCategory === 'all'
-              ? 'bg-gold text-background-primary border-gold'
-              : 'border-border text-text-secondary hover:text-text-primary hover:border-gold/50',
-          )}
-        >
-          Tous
-        </button>
-        {categories.map((cat) => (
+        {[{ id: 'all', name: 'Toutes les distinctions' }, ...categories].map((cat) => (
           <button
             key={cat.id}
             type="button"
@@ -50,16 +40,19 @@ export function NomineesGrid({ nominees, categories }: NomineesGridProps) {
         ))}
       </div>
 
-      {/* Grid */}
       {filtered.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filtered.map((nominee) => (
-            <NomineeCard key={nominee.id} nominee={nominee} />
+          {filtered.map((distingue) => (
+            <DistingueCard
+              key={distingue.id}
+              distingue={distingue}
+              categoryName={categoryName(distingue.categoryId)}
+            />
           ))}
         </div>
       ) : (
         <p className="text-center text-text-secondary py-12">
-          Aucun nominé dans cette catégorie pour le moment.
+          Aucun distingué dans cette catégorie pour le moment.
         </p>
       )}
     </div>

@@ -10,23 +10,23 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import type { Category } from '@/types/category';
-import type { Nominee } from '@/types/nominee';
+import type { Distingue } from '@/types/distingue';
 
 interface VoteFormProps {
   categories: Category[];
-  nominees: Nominee[];
+  distingues: Distingue[];
   showResults: boolean;
 }
 
 type Step = 'select' | 'email' | 'otp' | 'success';
 
-export function VoteForm({ categories, nominees, showResults }: VoteFormProps) {
+export function VoteForm({ categories, distingues, showResults }: VoteFormProps) {
   const searchParams = useSearchParams();
   const initialCategorySlug = searchParams.get('categorie') ?? '';
-  const initialNomineeId = searchParams.get('nomine') ?? '';
+  const initialDistingueId = searchParams.get('distingue') ?? '';
 
   const [categorySlug, setCategorySlug] = useState(initialCategorySlug || categories[0]?.slug || '');
-  const [nomineeId, setNomineeId] = useState(initialNomineeId);
+  const [distingueId, setDistingueId] = useState(initialDistingueId);
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [step, setStep] = useState<Step>('select');
@@ -37,9 +37,9 @@ export function VoteForm({ categories, nominees, showResults }: VoteFormProps) {
     () => categories.find((c) => c.slug === categorySlug),
     [categories, categorySlug],
   );
-  const categoryNominees = useMemo(
-    () => nominees.filter((n) => n.categoryId === selectedCategory?.id),
-    [nominees, selectedCategory],
+  const categoryDistingues = useMemo(
+    () => distingues.filter((d) => d.categoryId === selectedCategory?.id),
+    [distingues, selectedCategory],
   );
 
   // Load vote counts if enabled
@@ -51,17 +51,17 @@ export function VoteForm({ categories, nominees, showResults }: VoteFormProps) {
       .catch(() => {});
   }, [showResults, step]);
 
-  // Reset nominee when category changes
+  // Reset selection when category changes
   useEffect(() => {
-    if (!categoryNominees.find((n) => n.id === nomineeId)) {
-      setNomineeId(categoryNominees[0]?.id ?? '');
+    if (!categoryDistingues.find((d) => d.id === distingueId)) {
+      setDistingueId(categoryDistingues[0]?.id ?? '');
     }
-  }, [categoryNominees, nomineeId]);
+  }, [categoryDistingues, distingueId]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!nomineeId || !selectedCategory) {
-      toast.error('Veuillez sélectionner un nominé.');
+    if (!distingueId || !selectedCategory) {
+      toast.error('Veuillez faire un choix.');
       return;
     }
 
@@ -75,9 +75,25 @@ export function VoteForm({ categories, nominees, showResults }: VoteFormProps) {
         toast.error('Adresse email invalide.');
         return;
       }
-      // V1 : on simule l'envoi de l'OTP
-      toast.success('Code de validation envoyé. Astuce démo : 123456');
-      setStep('otp');
+      setLoading(true);
+      try {
+        const res = await fetch('/api/vote/code', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          toast.error(data.error ?? "Impossible d'envoyer le code.");
+          return;
+        }
+        toast.success(data.message ?? 'Code envoyé.');
+        setStep('otp');
+      } catch {
+        toast.error('Impossible de contacter le serveur.');
+      } finally {
+        setLoading(false);
+      }
       return;
     }
 
@@ -90,8 +106,8 @@ export function VoteForm({ categories, nominees, showResults }: VoteFormProps) {
           body: JSON.stringify({
             email,
             categoryId: selectedCategory.id,
-            nomineeId,
-            otp,
+            distingueId,
+            code: otp,
           }),
         });
         const data = await res.json();
@@ -163,28 +179,30 @@ export function VoteForm({ categories, nominees, showResults }: VoteFormProps) {
 
           <div>
             <Label className="text-xs uppercase tracking-[0.2em] text-gold mb-3 block">
-              2. Nominé
+              2. Votre choix
             </Label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {categoryNominees.map((n) => {
-                const isSelected = nomineeId === n.id;
+              {categoryDistingues.map((n) => {
+                const isSelected = distingueId === n.id;
                 const voteCount = counts[n.id] ?? 0;
                 return (
                   <button
                     key={n.id}
                     type="button"
-                    onClick={() => setNomineeId(n.id)}
+                    onClick={() => setDistingueId(n.id)}
                     className={cn(
                       'card-gold p-4 flex items-center gap-4 text-left transition-all',
                       isSelected ? '!border-gold ring-2 ring-gold/30' : '',
                     )}
                   >
-                    <div className="relative h-16 w-16 rounded-md overflow-hidden shrink-0">
-                      <Image src={n.photoUrl} alt={n.name} fill sizes="64px" className="object-cover" />
+                    <div className="relative h-16 w-16 rounded-md overflow-hidden shrink-0 bg-background-primary">
+                      {n.photoUrl && (
+                        <Image src={n.photoUrl} alt={n.name} fill sizes="64px" className="object-cover" />
+                      )}
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="font-serif text-text-primary truncate">{n.name}</p>
-                      <p className="text-xs text-text-secondary truncate">{n.role}</p>
+                      <p className="text-xs text-text-secondary truncate">{n.metier}</p>
                       {showResults && (
                         <p className="text-[10px] uppercase tracking-wider text-gold mt-1">
                           {voteCount} vote{voteCount > 1 ? 's' : ''}
@@ -199,7 +217,7 @@ export function VoteForm({ categories, nominees, showResults }: VoteFormProps) {
           </div>
 
           <div className="flex justify-center">
-            <Button type="submit" size="lg" disabled={!nomineeId}>
+            <Button type="submit" size="lg" disabled={!distingueId}>
               Continuer
             </Button>
           </div>
@@ -231,8 +249,8 @@ export function VoteForm({ categories, nominees, showResults }: VoteFormProps) {
             <Button type="button" variant="ghost" onClick={() => setStep('select')}>
               Retour
             </Button>
-            <Button type="submit" size="lg">
-              Recevoir mon code
+            <Button type="submit" size="lg" disabled={loading}>
+              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Recevoir mon code'}
             </Button>
           </div>
         </div>
@@ -246,9 +264,6 @@ export function VoteForm({ categories, nominees, showResults }: VoteFormProps) {
             <p className="text-text-secondary text-sm">
               Saisissez le code à 6 chiffres reçu par email.
             </p>
-            <p className="text-xs uppercase tracking-wider text-gold mt-3">
-              Démo V1 : utilisez le code <span className="font-mono">123456</span>
-            </p>
           </div>
           <div>
             <Label htmlFor="otp">Code à 6 chiffres</Label>
@@ -259,7 +274,7 @@ export function VoteForm({ categories, nominees, showResults }: VoteFormProps) {
               required
               value={otp}
               onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-              placeholder="123456"
+              placeholder="••••••"
               className="mt-2 text-center text-2xl tracking-[0.5em] font-mono"
             />
           </div>

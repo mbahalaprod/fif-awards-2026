@@ -1,8 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getSponsors } from '@/lib/data';
 
-export function SponsorsCarousel() {
-  const sponsors = getSponsors();
+export async function SponsorsCarousel() {
+  const sponsors = await getSponsors();
+  if (sponsors.length === 0) return null;
   // Duplicate list for seamless infinite marquee
   const doubled = [...sponsors, ...sponsors];
 
@@ -27,10 +29,20 @@ export function SponsorsCarousel() {
               className="shrink-0 flex flex-col items-center justify-center px-4"
               aria-hidden={idx >= sponsors.length}
             >
-              <div className="h-16 md:h-20 w-44 md:w-56 rounded-md border border-border bg-background-secondary flex items-center justify-center px-6">
-                <span className="font-serif text-base md:text-lg text-gold text-center leading-tight">
-                  {sponsor.name}
-                </span>
+              <div className="relative h-16 md:h-20 w-44 md:w-56 rounded-md border border-border bg-background-secondary flex items-center justify-center px-6">
+                {sponsor.logoUrl ? (
+                  <Image
+                    src={sponsor.logoUrl}
+                    alt={sponsor.name}
+                    fill
+                    sizes="224px"
+                    className="object-contain p-3"
+                  />
+                ) : (
+                  <span className="font-serif text-base md:text-lg text-gold text-center leading-tight">
+                    {sponsor.name}
+                  </span>
+                )}
               </div>
               <span className="text-[10px] uppercase tracking-[0.2em] text-text-secondary mt-2">
                 {sponsor.tier}

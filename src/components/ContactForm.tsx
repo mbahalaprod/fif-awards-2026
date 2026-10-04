@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { contactSchema, type ContactInput } from '@/lib/validations';
+import { HoneypotField } from '@/components/HoneypotField';
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -44,13 +45,14 @@ export function ContactForm() {
     return (
       <div className="card-gold p-10 text-center">
         <h3 className="font-serif text-2xl text-gold mb-3">Message envoyé</h3>
-        <p className="text-text-secondary">Merci ! Notre équipe vous répondra sous 48h ouvrées.</p>
+        <p className="text-text-secondary">Merci ! Notre équipe vous répondra dans les meilleurs délais.</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="card-gold p-6 md:p-8 space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="relative card-gold p-6 md:p-8 space-y-5">
+      <HoneypotField registration={register('site_web')} />
       <div>
         <Label htmlFor="name">Nom complet</Label>
         <Input id="name" {...register('name')} className="mt-1" />

@@ -4,8 +4,7 @@ export interface Sponsor {
   id: string;
   name: string;
   tier: SponsorTier;
-  description: string;
-  logoUrl: string;
-  websiteUrl: string;
-  sector: string;
+  description: string | null;
+  logoUrl: string | null;
+  websiteUrl: string | null;
 }

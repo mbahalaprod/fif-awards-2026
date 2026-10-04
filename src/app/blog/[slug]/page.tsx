@@ -2,38 +2,30 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import { getArticles, getArticleBySlug } from '@/lib/data';
-import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
 
 interface PageProps {
   params: { slug: string };
 }
 
-const categoryLabels: Record<string, string> = {
-  annonces: 'Annonce',
-  portraits: 'Portrait',
-  programme: 'Programme',
-  coulisses: 'Coulisses',
-};
-
-export function generateStaticParams() {
-  return getArticles().map((a) => ({ slug: a.slug }));
+export async function generateStaticParams() {
+  return (await getArticles()).map((a) => ({ slug: a.slug }));
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const article = getArticleBySlug(params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const article = await getArticleBySlug(params.slug);
   if (!article) return { title: 'Article introuvable' };
   return {
     title: article.title,
     description: article.excerpt,
-    openGraph: { images: [article.imageUrl] },
+    openGraph: article.imageUrl ? { images: [article.imageUrl] } : undefined,
   };
 }
 
-export default function BlogArticlePage({ params }: PageProps) {
-  const article = getArticleBySlug(params.slug);
+export default async function BlogArticlePage({ params }: PageProps) {
+  const article = await getArticleBySlug(params.slug);
   if (!article) notFound();
 
   return (
@@ -46,16 +38,11 @@ export default function BlogArticlePage({ params }: PageProps) {
           <ArrowLeft className="h-4 w-4" /> Retour aux actualités
         </Link>
 
-        <Badge className="mb-4">{categoryLabels[article.category]}</Badge>
         <h1 className="font-serif text-3xl md:text-5xl text-text-primary leading-tight mb-6">
           {article.title}
         </h1>
 
         <div className="flex flex-wrap items-center gap-4 text-xs text-text-secondary mb-8 pb-8 border-b border-border">
-          <span className="inline-flex items-center gap-1">
-            <User className="h-3 w-3" />
-            {article.author}
-          </span>
           <span className="inline-flex items-center gap-1">
             <Calendar className="h-3 w-3" />
             {formatDate(article.publishedAt)}
@@ -66,16 +53,18 @@ export default function BlogArticlePage({ params }: PageProps) {
           </span>
         </div>
 
-        <div className="relative aspect-video rounded-lg overflow-hidden border border-border mb-10">
-          <Image
-            src={article.imageUrl}
-            alt={article.title}
-            fill
-            priority
-            sizes="(min-width: 768px) 768px, 100vw"
-            className="object-cover"
-          />
-        </div>
+        {article.imageUrl && (
+          <div className="relative aspect-video rounded-lg overflow-hidden border border-border mb-10">
+            <Image
+              src={article.imageUrl}
+              alt={article.title}
+              fill
+              priority
+              sizes="(min-width: 768px) 768px, 100vw"
+              className="object-cover"
+            />
+          </div>
+        )}
 
         <div className="prose prose-invert max-w-none text-text-secondary leading-relaxed space-y-5">
           {article.content.split('\n\n').map((paragraph, i) => (
