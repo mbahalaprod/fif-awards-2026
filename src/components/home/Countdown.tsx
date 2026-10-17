@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getCountdown, type CountdownValue, FESTIVAL_DATE } from '@/lib/countdown';
+import { VENUE } from '@/lib/event';
 
 const labels = {
   days: 'Jours',
@@ -79,7 +80,7 @@ export function Countdown() {
         </div>
 
         <p className="text-xs uppercase tracking-[0.2em] text-text-secondary mt-10">
-          Radisson Blu Hôtel — Conakry, Guinée · {FESTIVAL_DATE.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+          {VENUE.name} — {VENUE.city}, {VENUE.country} · {FESTIVAL_DATE.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
         </p>
       </div>
     </section>

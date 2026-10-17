@@ -5,11 +5,12 @@ import { Calendar, MapPin, Clock } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { getProgramByDay } from '@/lib/data';
+import { VENUE, VENUE_MAP_EMBED_URL } from '@/lib/event';
 
 export const metadata: Metadata = {
   title: 'Programme officiel',
   description:
-    'Déroulé heure par heure des deux soirées du FIF AWARDS 2026 — 19 et 20 novembre, Radisson Blu Conakry.',
+    'Déroulé heure par heure des deux soirées du FIF AWARDS 2026 — 19 et 20 novembre, Centre Culturel Franco-Guinéen, Conakry.',
 };
 
 const typeLabels: Record<string, string> = {
@@ -37,7 +38,7 @@ export default function ProgrammePage() {
               <Calendar className="h-4 w-4 text-gold" /> 19 & 20 novembre 2026
             </span>
             <span className="inline-flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-gold" /> Radisson Blu, Conakry
+              <MapPin className="h-4 w-4 text-gold" /> {VENUE.name}, {VENUE.city}
             </span>
           </div>
         </div>
@@ -90,8 +91,8 @@ export default function ProgrammePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
           <div className="card-gold overflow-hidden">
             <iframe
-              src="https://www.google.com/maps?q=Radisson+Blu+Hotel+Conakry&output=embed"
-              title="Radisson Blu Conakry"
+              src={VENUE_MAP_EMBED_URL}
+              title={`${VENUE.name}, ${VENUE.city}`}
               width="100%"
               height="320"
               style={{ border: 0 }}

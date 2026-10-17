@@ -37,7 +37,7 @@ insert into public.actualites (slug, titre, date_publication, texte, statut) val
     'quatre-distinctions-honneur-2026',
     'FIF AWARDS 2026 : les quatre distinctions d''honneur',
     '2026-10-04',
-    'Pour sa 4ᵉ édition, les 19 et 20 novembre 2026 au Radisson Blu de Conakry, le FIF AWARDS met à l''honneur quatre distinctions : Métiers et Talents Techniques du Cinéma ; Pionniers du Cinéma Guinéen et Africain ; Bravoure & Leadership Féminin dans le Cinéma Africain ; Institutions, Mécènes & Médias au Service du Cinéma.
+    'Pour sa 4ᵉ édition, les 19 et 20 novembre 2026 au Centre Culturel Franco-Guinéen de Conakry, le FIF AWARDS met à l''honneur quatre distinctions : Métiers et Talents Techniques du Cinéma ; Pionniers du Cinéma Guinéen et Africain ; Bravoure & Leadership Féminin dans le Cinéma Africain ; Institutions, Mécènes & Médias au Service du Cinéma.
 
 Les distingués 2026 sont choisis par le Comité d''Organisation. Leurs noms seront publiés sur ce site avant la cérémonie, lors d''une annonce publique.',
     'publie'

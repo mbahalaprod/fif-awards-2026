@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Calendar, MapPin, ArrowRight, Clock } from 'lucide-react';
 import { getProgramByDay } from '@/lib/data';
+import { VENUE } from '@/lib/event';
 
 export function ProgramPreview() {
   const day1 = getProgramByDay(1).slice(0, 4);
@@ -19,7 +20,7 @@ export function ProgramPreview() {
             </span>
             <span className="inline-flex items-center gap-2">
               <MapPin className="h-4 w-4 text-gold" />
-              Radisson Blu, Conakry
+              {VENUE.name}, {VENUE.city}
             </span>
           </p>
         </div>

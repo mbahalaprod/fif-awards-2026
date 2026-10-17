@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getArticles, getDistingues, getSettings } from '@/lib/data';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fifawards.gn';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.fifawards.org';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();

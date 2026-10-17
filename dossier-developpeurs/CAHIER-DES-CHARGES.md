@@ -31,7 +31,7 @@
 ## 1. Le festival et l'objectif du site
 
 **FIF AWARDS — Festival International du Film Awards**, 4ᵉ édition :
-**19 et 20 novembre 2026**, hôtel **Radisson Blu, Conakry**.
+**19 et 20 novembre 2026**, **Centre Culturel Franco-Guinéen (CCFG), Conakry**.
 
 Le festival distingue toute la chaîne de valeur du cinéma guinéen et africain. Le site
 doit permettre de :

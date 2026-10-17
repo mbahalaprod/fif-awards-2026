@@ -4,7 +4,7 @@ import { Toaster } from 'sonner';
 import './globals.css';
 
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fifawards.gn';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.fifawards.org';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -13,14 +13,14 @@ export const metadata: Metadata = {
     template: '%s | FIF AWARDS 2026',
   },
   description:
-    "Festival International du Film AWARDS, 4ᵉ édition. Les 19 et 20 novembre 2026 à Conakry, au Radisson Blu. Célébrer toute la chaîne de valeur du cinéma guinéen.",
+    "Festival International du Film AWARDS, 4ᵉ édition. Les 19 et 20 novembre 2026 à Conakry, au Centre Culturel Franco-Guinéen. Célébrer toute la chaîne de valeur du cinéma guinéen.",
   keywords: [
     'FIF AWARDS',
     'cinéma guinéen',
     'festival de film',
     'Conakry',
     'Guinée',
-    'Radisson Blu',
+    'Centre Culturel Franco-Guinéen',
     '2026',
   ],
   authors: [{ name: "Comité d'Organisation FIF AWARDS" }],

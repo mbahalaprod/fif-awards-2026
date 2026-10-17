@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { MapPin, Mail, Phone } from 'lucide-react';
 import type { SiteSettings } from '@/types/settings';
 import { SocialLinks } from './SocialLinks';
+import { VENUE } from '@/lib/event';
 
 export function Footer({ settings }: { settings: SiteSettings }) {
   return (
@@ -22,7 +23,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
             </Link>
             <p className="mt-4 text-sm text-text-secondary leading-relaxed">
               Festival International du Film AWARDS. 4ᵉ édition les 19 et 20 novembre 2026 à Conakry,
-              au Radisson Blu.
+              au {VENUE.name}.
             </p>
             <p className="mt-4 text-xs uppercase tracking-[0.2em] text-gold">
               {settings.slogan}

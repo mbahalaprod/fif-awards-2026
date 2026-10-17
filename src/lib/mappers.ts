@@ -3,6 +3,7 @@ import type { Distingue, PublicationStatus } from '@/types/distingue';
 import type { Sponsor, SponsorTier } from '@/types/sponsor';
 import type { Article } from '@/types/article';
 import type { SiteSettings } from '@/types/settings';
+import { VENUE } from '@/lib/event';
 
 // Lignes telles que renvoyées par Supabase (colonnes en français).
 
@@ -138,7 +139,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   phone: null,
   email: null,
   whatsapp: null,
-  address: 'Radisson Blu Hôtel, Conakry, Guinée',
+  address: VENUE.fullAddress,
   facebookUrl: null,
   instagramUrl: null,
   youtubeUrl: null,

@@ -3,6 +3,7 @@ import { MapPin, Mail, Phone } from 'lucide-react';
 import { ContactForm } from '@/components/ContactForm';
 import { SocialLinks } from '@/components/layout/SocialLinks';
 import { getSettings } from '@/lib/data';
+import { VENUE, VENUE_MAP_EMBED_URL } from '@/lib/event';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -64,8 +65,8 @@ export default async function ContactPage() {
 
             <div className="card-gold overflow-hidden">
               <iframe
-                src="https://www.google.com/maps?q=Radisson+Blu+Hotel+Conakry&output=embed"
-                title="Radisson Blu Conakry"
+                src={VENUE_MAP_EMBED_URL}
+                title={`${VENUE.name}, ${VENUE.city}`}
                 width="100%"
                 height="280"
                 style={{ border: 0 }}

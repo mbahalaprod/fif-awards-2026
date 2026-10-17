@@ -4,6 +4,7 @@ import { requireAdmin } from '@/lib/admin/auth';
 import { createSessionClient } from '@/lib/supabase/server';
 import { checkbox, done, fail, optionalText, optionalUrl, refreshPublicSite, text } from '@/lib/admin/form';
 import type { ActionState } from '@/lib/admin/action-state';
+import { VENUE } from '@/lib/event';
 
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -45,7 +46,7 @@ export async function updateSettings(_: ActionState, formData: FormData): Promis
       telephone: optionalText(formData, 'telephone'),
       email,
       whatsapp: optionalText(formData, 'whatsapp'),
-      adresse: text(formData, 'adresse') || 'Radisson Blu Hôtel, Conakry, Guinée',
+      adresse: text(formData, 'adresse') || VENUE.fullAddress,
       ...urls,
     })
     .eq('id', 1);

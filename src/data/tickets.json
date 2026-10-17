@@ -18,10 +18,10 @@
     "name": "VIP",
     "price": 150000,
     "currency": "GNF",
-    "description": "Cérémonie + cocktail dînatoire dans le hall d'honneur.",
+    "description": "Cérémonie + cocktail dînatoire.",
     "features": [
       "Tout le contenu du billet Standard",
-      "Cocktail dînatoire au hall d'honneur",
+      "Cocktail dînatoire",
       "Place premium dans la salle",
       "Accès au lounge partenaires",
       "Photo officielle avec le décor du festival"
@@ -36,7 +36,7 @@
     "description": "L'expérience complète : cérémonie, cocktail, after-party et photo officielle.",
     "features": [
       "Tout le contenu du billet VIP",
-      "Accès à l'after-party officielle au rooftop",
+      "Accès à l'after-party officielle",
       "Photo officielle avec un distingué (sur réservation)",
       "Cadeau exclusif partenaire Platine",
       "Accès au tapis rouge invités"

@@ -5,6 +5,7 @@ import { DistinguesPreview } from '@/components/home/DistinguesPreview';
 import { getSettings } from '@/lib/data';
 import { ProgramPreview } from '@/components/home/ProgramPreview';
 import { PreviousEditionsGallery } from '@/components/home/PreviousEditionsGallery';
+import { VENUE } from '@/lib/event';
 
 const eventJsonLd = {
   '@context': 'https://schema.org',
@@ -18,7 +19,7 @@ const eventJsonLd = {
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
   location: {
     '@type': 'Place',
-    name: 'Radisson Blu Hôtel Conakry',
+    name: VENUE.name,
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Conakry',
@@ -28,7 +29,7 @@ const eventJsonLd = {
   organizer: {
     '@type': 'Organization',
     name: "Comité d'Organisation FIF AWARDS",
-    url: 'https://fifawards.gn',
+    url: 'https://www.fifawards.org',
   },
 };
 

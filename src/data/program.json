@@ -5,7 +5,7 @@
     "startTime": "17:00",
     "endTime": "18:00",
     "title": "Accueil et tapis rouge",
-    "description": "Arrivée des invités, photos officielles et accueil sur le tapis rouge devant l'hôtel Radisson Blu.",
+    "description": "Arrivée des invités, photos officielles et accueil sur le tapis rouge du Centre Culturel Franco-Guinéen.",
     "type": "opening"
   },
   {
@@ -14,7 +14,7 @@
     "startTime": "18:00",
     "endTime": "18:30",
     "title": "Cocktail de bienvenue",
-    "description": "Cocktail dînatoire dans le hall d'honneur du Radisson Blu, réservé aux invités munis d'un billet VIP ou Premium.",
+    "description": "Cocktail dînatoire dans l'espace réception, réservé aux invités munis d'un billet VIP ou Premium.",
     "type": "networking"
   },
   {
@@ -141,7 +141,7 @@
     "startTime": "22:15",
     "endTime": "01:00",
     "title": "After-party officielle",
-    "description": "Soirée festive réservée aux détenteurs de billets Premium et invités d'honneur, dans le rooftop du Radisson Blu.",
+    "description": "Soirée festive réservée aux détenteurs de billets Premium et invités d'honneur.",
     "type": "networking"
   }
 ]

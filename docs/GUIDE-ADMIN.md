@@ -1,6 +1,6 @@
 # Guide rapide de l'administrateur
 
-Adresse : **`/admin`** (par exemple `https://fifawards.gn/admin`). Chaque personne a
+Adresse : **`/admin`** (par exemple `https://www.fifawards.org/admin`). Chaque personne a
 son propre compte : ne partagez jamais un mot de passe.
 
 ## Rôles

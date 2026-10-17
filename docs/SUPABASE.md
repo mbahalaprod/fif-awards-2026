@@ -37,7 +37,7 @@ bucket d'images `medias` (5 Mo maximum, JPG, PNG ou WebP).
   uniquement depuis l'admin (menu « Comptes ») ou par le tableau de bord Supabase.
 
 **Authentication → URL Configuration** : mettez l'adresse du site dans **Site URL**
-(par exemple `https://fifawards.gn`).
+(par exemple `https://www.fifawards.org`).
 
 ## 4. Créer le premier administrateur
 

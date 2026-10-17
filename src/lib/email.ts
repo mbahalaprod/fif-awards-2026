@@ -55,7 +55,7 @@ function confirmationsEnabled(): boolean {
   return process.env.EMAIL_CONFIRMATIONS_ACTIVES === 'true';
 }
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fifawards.gn';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.fifawards.org';
 
 /** Notification à l'équipe (nouvelle candidature, message, réservation). */
 export async function notifyTeam(subject: string, lines: [string, string | null | undefined][], replyTo?: string) {
